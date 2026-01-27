@@ -1,20 +1,18 @@
-import "./ExpenseHeaderStyle.scss";
+import "./styles.scss";
 
-export const ExpenseHeader = () => {
+export const Header = () => {
   return (
-    <>
+    <header className="header">
       <div className="header__logotyp">
         <img
           src="images/logo.png"
           alt="FINANCEFLOW"
-          width="120px"
-          height="120px"
           className="header__images"
         />
-        <div className="header__separation"></div>
+        <div className="header__line"></div>
         <h1 className="header__title">Учет расходов</h1>
       </div>
-      <hr className="header__line" />
-    </>
+      <hr className="line" />
+    </header>
   );
 };

@@ -15,6 +15,7 @@
   &__category,
   &__date,
   &__sum {
+    font-family: "Mazzard";
     text-align: center;
     font-size: 18px;
     font-weight: 500;
@@ -32,6 +33,7 @@
 
   &__delete,
   &__redakter {
+    font-family: "Mazzard";
     color: #92278f;
     width: 40px;
     height: 40px;
@@ -58,8 +60,38 @@
 
 @media (max-width: 780px) {
   .main-list {
+    &__ul {
+      padding-right: 30px;
+    }
+
     &__line {
       display: none;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .main-list {
+    width: calc(100% - 30px);
+
+    &__adaptiv {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    &__ul {
+      padding-right: 20px;
+      padding-left: 20px;
+    }
+
+    &__item {
+      padding: 15px 20px;
+    }
+
+    &__adaptiv {
+      display: grid;
+      flex-grow: 1;
+      gap: 0;
     }
   }
 }

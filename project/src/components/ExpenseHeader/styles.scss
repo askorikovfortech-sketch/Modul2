@@ -1,5 +1,10 @@
 .header {
-  
+  .header {
+    max-width: 1440px;
+    height: 121px;
+    margin: 0 auto;
+  }
+
   &__logotyp {
     display: flex;
     flex-wrap: wrap;
@@ -7,7 +12,7 @@
     margin-left: 80px;
   }
 
-  &__separation {
+  &__line {
     width: 1px;
     height: 24px;
     background-color: #ccd3da;
@@ -15,9 +20,15 @@
   }
 
   &__title {
+    font-family: "Mazzard";
     font-size: 50px;
     font-weight: 500;
     margin-top: 29px;
+  }
+
+  &__images {
+    width: 120px;
+    height: 120px;
   }
 }
 
