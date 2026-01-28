@@ -1,6 +1,6 @@
 import "./styles.scss";
 
-export const Expense = ({ expense }) => {
+export const MainList = ({ expense }) => {
   return (
     <div className="main-list">
       <ul className="main-list__ul">
@@ -15,13 +15,13 @@ export const Expense = ({ expense }) => {
             <button type="button" className="main-list__redakter">
               <img
                 className="main-list__redacter-button"
-                src="/images/Group.png"
+                src="/images/pencil.png"
               />
             </button>
             <button type="button" className="main-list__delete">
               <img
                 className="main-list__delete-button"
-                src="/images/Delete.png"
+                src="/images/basket.png"
               />
             </button>
           </div>

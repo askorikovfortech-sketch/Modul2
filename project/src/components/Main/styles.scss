@@ -9,7 +9,7 @@
   }
 }
 
-.main-katigories {
+.main-category {
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -37,7 +37,7 @@
 }
 
 @media (max-width: 780px) {
-  .main-katigories {
+  .main-category {
     display: none;
   }
 }

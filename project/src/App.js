@@ -1,10 +1,5 @@
-import { HomePages } from "./pages";
+import { HomePages } from "./pages/HomePages";
 
-function App() {
-  return (
-    <div className="App">
-      <HomePages />
-    </div>
-  );
-}
-export default App;
+export const App = () => {
+  return <HomePages />;
+};
