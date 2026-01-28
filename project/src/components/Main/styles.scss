@@ -1,0 +1,43 @@
+.main {
+  max-width: 1440px;
+  margin: 50px auto;
+
+  &__block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.main-category {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 1080px;
+
+  &__text {
+    font-family: "Mazzard";
+    text-align: center;
+    flex: 1;
+    font-size: 12px;
+    font-weight: 500;
+    color: #677b8f;
+  }
+
+  &__line {
+    position: absolute;
+    top: -20px;
+    left: 40px;
+    width: 1040px;
+    height: 1px;
+    border: none;
+    background-color: #ccd3da;
+  }
+}
+
+@media (max-width: 780px) {
+  .main-category {
+    display: none;
+  }
+}
