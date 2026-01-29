@@ -1,4 +1,4 @@
-.main-list {
+.expense {
   width: 1080px;
 
   &__item {
@@ -31,20 +31,6 @@
     color: #92278f;
   }
 
-  &__delete,
-  &__redakter {
-    font-family: "Mazzard";
-    color: #92278f;
-    width: 40px;
-    height: 40px;
-    background-color: #ccd3da;
-    border-radius: 50%;
-    border: none;
-    font-size: 24px;
-    text-align: center;
-    cursor: pointer;
-  }
-
   &__edit {
     display: flex;
     gap: 10px;
@@ -58,9 +44,23 @@
   }
 }
 
+.expense-redakter,
+.expense-delete {
+  font-family: "Mazzard";
+  color: #92278f;
+  width: 40px;
+  height: 40px;
+  background-color: #ccd3da;
+  border-radius: 50%;
+  border: none;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+}
+
 @media (max-width: 780px) {
-  .main-list {
-    &__ul {
+  .expense {
+    &__list {
       padding-right: 30px;
     }
 
@@ -71,7 +71,7 @@
 }
 
 @media (max-width: 480px) {
-  .main-list {
+  .expense {
     width: calc(100% - 30px);
 
     &__adaptiv {
@@ -79,7 +79,7 @@
       flex-wrap: wrap;
     }
 
-    &__ul {
+    &__list {
       padding-right: 20px;
       padding-left: 20px;
     }

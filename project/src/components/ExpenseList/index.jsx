@@ -1,8 +1,8 @@
-import { MainList } from "../MainList";
+import { Expense } from "../Expense";
 import { expenses } from "../constants";
 import "./styles.scss";
 
-export const Main = () => {
+export const ExpenseList = () => {
   return (
     <main className="main">
       <div className="main__block">
@@ -13,7 +13,7 @@ export const Main = () => {
           <p className="main-category__text">Сумма расхода</p>
         </div>
         {expenses.map((expense) => (
-          <MainList key={expense.id} expense={expense} />
+          <Expense key={expense.id} expense={expense} />
         ))}
       </div>
     </main>
