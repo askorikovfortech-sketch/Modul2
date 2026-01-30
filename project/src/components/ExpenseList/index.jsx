@@ -1,8 +1,18 @@
+import { useState } from "react";
 import { Expense } from "../Expense";
 import { expenses } from "../constants";
 import "./styles.scss";
 
 export const ExpenseList = () => {
+  const [expensesList, setExpensesList] = useState(expenses);
+
+  const removeExpense = (remote) => {
+    const updatedExpenses = expensesList.filter(
+      (expense) => expense.id !== remote,
+    );
+    setExpensesList(updatedExpenses);
+  };
+
   return (
     <div className="expense-list">
       <div className="expense-list__block">
@@ -12,8 +22,12 @@ export const ExpenseList = () => {
           <p className="expense-list__category-text">Дата</p>
           <p className="expense-list__category-text">Сумма расхода</p>
         </div>
-        {expenses.map((expense) => (
-          <Expense key={expense.id} expense={expense} />
+        {expensesList.map((expense) => (
+          <Expense
+            key={expense.id}
+            expense={expense}
+            removeExpense={removeExpense}
+          />
         ))}
       </div>
     </div>

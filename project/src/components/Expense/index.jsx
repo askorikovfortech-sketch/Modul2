@@ -1,8 +1,8 @@
-import pencil from "../../images/pencil.png"
-import basket from "../../images/basket.png"
+import pencil from "../../images/pencil.png";
+import basket from "../../images/basket.png";
 import "./styles.scss";
 
-export const Expense = ({ expense }) => {
+export const Expense = ({ expense, removeExpense }) => {
   return (
     <div className="expense">
       <ul className="expense__list">
@@ -26,6 +26,7 @@ export const Expense = ({ expense }) => {
                 className="expense-delete__images"
                 src={basket}
                 alt="basket"
+                onClick={() => removeExpense(expense.id)}
               />
             </button>
           </div>
