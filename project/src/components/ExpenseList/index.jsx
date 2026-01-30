@@ -6,11 +6,11 @@ import "./styles.scss";
 export const ExpenseList = () => {
   const [expensesList, setExpensesList] = useState(expenses);
 
-  const removeExpense = (Remove) => {
-    const expensesFilter = expensesList.filter(
-      (expense) => expense.id !== Remove,
+  const removeExpense = (remote) => {
+    const updatedExpenses = expensesList.filter(
+      (expense) => expense.id !== remote,
     );
-    setExpensesList(expensesFilter);
+    setExpensesList(updatedExpenses);
   };
 
   return (
