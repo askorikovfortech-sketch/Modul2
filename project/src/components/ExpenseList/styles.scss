@@ -1,7 +1,4 @@
-.main {
-  max-width: 1440px;
-  margin: 50px auto;
-
+.expense-list {
   &__block {
     display: flex;
     flex-wrap: wrap;
@@ -9,14 +6,14 @@
   }
 }
 
-.main-category {
+.expense-list__category {
   position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   width: 1080px;
 
-  &__text {
+  &-text {
     font-family: "Mazzard";
     text-align: center;
     flex: 1;
@@ -25,7 +22,7 @@
     color: #677b8f;
   }
 
-  &__line {
+  &-line {
     position: absolute;
     top: -20px;
     left: 40px;
@@ -37,7 +34,9 @@
 }
 
 @media (max-width: 780px) {
-  .main-category {
-    display: none;
+  .expense-list {
+    &__category {
+      display: none;
+    }
   }
 }

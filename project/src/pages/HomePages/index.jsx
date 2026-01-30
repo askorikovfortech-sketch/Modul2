@@ -6,7 +6,10 @@ export const HomePages = () => {
   return (
     <div className="home">
       <Header />
-      <ExpenseList />
+
+      <main className="main">
+        <ExpenseList />
+      </main>
     </div>
   );
 };

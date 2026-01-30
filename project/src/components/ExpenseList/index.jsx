@@ -14,13 +14,13 @@ export const ExpenseList = () => {
   };
 
   return (
-    <main className="main">
-      <div className="main__block">
-        <div className="main-category">
-          <hr className="main-category__line" />
-          <p className="main-category__text">Статья расходов</p>
-          <p className="main-category__text">Дата</p>
-          <p className="main-category__text">Сумма расхода</p>
+    <div className="expense-list">
+      <div className="expense-list__block">
+        <div className="expense-list__category">
+          <hr className="expense-list__category-line" />
+          <p className="expense-list__category-text">Статья расходов</p>
+          <p className="expense-list__category-text">Дата</p>
+          <p className="expense-list__category-text">Сумма расхода</p>
         </div>
         {expensesList.map((expense) => (
           <Expense
@@ -30,6 +30,6 @@ export const ExpenseList = () => {
           />
         ))}
       </div>
-    </main>
+    </div>
   );
 };
