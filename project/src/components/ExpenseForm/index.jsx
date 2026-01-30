@@ -2,10 +2,9 @@ import { useState } from "react";
 import "./styles.scss";
 
 export const ExpenseForm = ({ addExpense }) => {
+  const [category, setCategory] = useState("");
 
-  const [category, setCategory] = useState("")
-
-  const [price, setPrice] = useState("")
+  const [price, setPrice] = useState("");
 
   const [errors, setErrors] = useState({ category: "", price: "" });
 
@@ -28,25 +27,25 @@ export const ExpenseForm = ({ addExpense }) => {
       newErrors.category = "Поле не должно быть пустым и меньше или равно 0";
       hasError = true;
     }
-     if (!price.trim()) {
+    if (!price.trim()) {
       newErrors.price = "Поле не должно быть пустым и меньше или равно 0";
       hasError = true;
     }
-     if (Number(price) <= 0) {
+    if (Number(price) <= 0) {
       newErrors.price = "Поле не должно быть пустым и меньше или равно 0";
       hasError = true;
-
-    }if (hasError){
-      setErrors(newErrors)
-      return
+    }
+    if (hasError) {
+      setErrors(newErrors);
+      return;
     }
 
     const newExpense = {
       id: Date.now(),
       category: category.trim(),
       date: generateDate(),
-      price: price.trim()
-    }
+      price: price.trim(),
+    };
 
     addExpense(newExpense);
     setCategory("");

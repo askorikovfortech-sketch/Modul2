@@ -1,5 +1,5 @@
-import pencil from "../../images/pencil.png"
-import basket from "../../images/basket.png"
+import pencil from "../../images/pencil.png";
+import basket from "../../images/basket.png";
 import "./styles.scss";
 
 export const Expense = ({ expense }) => {
