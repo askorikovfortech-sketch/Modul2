@@ -1,8 +1,7 @@
-.expense-input {
+.expense-form {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
-
 
   &__conteiner {
     display: flex;
@@ -57,10 +56,19 @@
     border: none;
     cursor: pointer;
   }
+
+  &__error-message {
+    font-weight: 400;
+    font-size: 12px;
+    color: #ed1c24;
+    position: relative;
+    top: 10px;
+  }
 }
 
 @media (max-width: 780px) {
-  .expense-input {
+  .expense-form {
+    margin-bottom: 100px;
     &__record-record {
       width: 100%;
       height: auto;
@@ -71,6 +79,13 @@
       background-color: transparent;
       justify-content: center;
       gap: 0;
+    }
+
+    &__record {
+      flex-wrap: wrap;
+      margin: 0;
+      gap: 20px;
+      height: 60px;
     }
 
     &__record-text {
@@ -93,19 +108,32 @@
       border-radius: 28px;
       font-size: 16px;
     }
+
+    &__error-message{
+      top: 0;
+    }
   }
 }
 @media (max-width: 480px) {
-  .expense-input {
+  .expense-form {
+    margin-bottom: 130px;
     &__record {
       width: calc(100% - 30px);
+      background-color: #ffffff00;
     }
     &__record-block {
       padding: 0 15px;
+      height: 60px;
+      background-color: #fff;
+      border-radius: 15px;
     }
 
     &__record-button {
       height: 50px;
+    }
+
+    &__error-message{
+      top: 0;
     }
   }
 }
