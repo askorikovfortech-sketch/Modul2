@@ -19,6 +19,7 @@
     gap: 97px;
     margin-left: 40px;
   }
+
   &__record-block {
     position: relative;
     width: 333px;
@@ -69,6 +70,7 @@
 @media (max-width: 780px) {
   .expense-form {
     margin-bottom: 100px;
+
     &__record-record {
       width: 100%;
       height: auto;
@@ -114,13 +116,16 @@
     }
   }
 }
+
 @media (max-width: 480px) {
   .expense-form {
     margin-bottom: 130px;
+
     &__record {
       width: calc(100% - 30px);
       background-color: #ffffff00;
     }
+
     &__record-block {
       padding: 0 15px;
       height: 60px;

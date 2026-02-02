@@ -1,6 +1,7 @@
 @font-face {
   font-family: "Mazzard";
-  src: url("../public/fonnts.com-mazzardsoftm-regular.otf") format("opentype");
+  src: url("../public/fonts/fonnts.com-mazzardsoftm-regular.otf")
+    format("opentype");
 }
 
 body {
