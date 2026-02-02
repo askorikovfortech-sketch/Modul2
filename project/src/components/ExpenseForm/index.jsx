@@ -4,6 +4,8 @@ export const ExpenseForm = ({
   expenseForm,
   errors,
   onUpdsteExpenseForm,
+  formSubmitted,
+  onUpdateExpenseForm,
   onAddExpense,
 }) => {
   return (
@@ -15,10 +17,16 @@ export const ExpenseForm = ({
             placeholder="Статья расходов"
             className="expense-form__record-text"
             value={expenseForm.category}
-            onChange={(e) => onUpdsteExpenseForm("category", e.target.value)}
+            onChange={(e) => onUpdateExpenseForm("category", e.target.value)}
           />
           <hr className="expense-form__record-line" />
-          <span className="expense-form__error-message">{errors.category}</span>
+          <span
+            className={`expense-form__error-message ${
+              formSubmitted && errors.category
+            }`}
+          >
+            {errors.category}
+          </span>
         </div>
         <div className="expense-form__record-block">
           <input
@@ -26,11 +34,17 @@ export const ExpenseForm = ({
             placeholder="Сумма"
             className="expense-form__record-text"
             value={expenseForm.price}
-            onChange={(e) => onUpdsteExpenseForm("price", e.target.value)}
+            onChange={(e) => onUpdateExpenseForm("price", e.target.value)}
             min={0}
           />
           <hr className="expense-form__record-line" />
-          <span className="expense-form__error-message">{errors.price}</span>
+          <span
+            className={`expense-form__error-message ${
+              formSubmitted && errors.price
+            }`}
+          >
+            {errors.price}
+          </span>
         </div>
         <button
           type="button"

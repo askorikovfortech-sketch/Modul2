@@ -11,6 +11,8 @@ export const HomePages = () => {
 
   const [errors, setErrors] = useState({ category: "", price: "" });
 
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   const generateDate = () => {
     const now = new Date();
     const day = String(now.getDate()).padStart(2, "0");
@@ -19,29 +21,41 @@ export const HomePages = () => {
     return `${day}.${month}.${year}`;
   };
 
+  const onUpdateExpenseForm = (field, value) => {
+    setExpenseForm((prev) => ({ ...prev, [field]: value }));
+
+    if (formSubmitted) {
+      setFormSubmitted(false);
+    }
+
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: "" }));
+    }
+  };
+
+  const validatePrice = (price) => {
+    return !price.trim() || Number(price) <= 0;
+  };
+
   const addExpense = (newExpense) => {
-    setExpenses([...expenses, newExpense]);
+    setExpenses((prevExpenses) => [...prevExpenses, newExpense]);
   };
 
-  const updateExpenseForm = (field, value) => {
-    setExpenseForm((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
-
-  const handleExpense = () => {
-    const errorText = "Поле не должно быть пустым и меньше или равно 0";
+  const onAddExpense = () => {
+    setFormSubmitted(true);
 
     const newErrors = {
-      category: !expenseForm.category.trim() ? errorText : "",
-      price:
-        !expenseForm.price.trim() || Number(expenseForm.price) <= 0
-          ? errorText
-          : "",
+      category: !expenseForm.category.trim()
+        ? "Поле не должно быть пустым и меньше или равно 0"
+        : "",
+      price: validatePrice(expenseForm.price)
+        ? "Поле не должно быть пустым и меньше или равно 0"
+        : "",
     };
 
-    if (newErrors.category || newErrors.price) {
+    const hasErrors = newErrors.category || newErrors.price;
+
+    if (hasErrors) {
       setErrors(newErrors);
       return;
     }
@@ -55,9 +69,11 @@ export const HomePages = () => {
 
     addExpense(createExpense);
 
-    setErrors(newErrors);
+    setErrors({ category: "", price: "" });
 
     setExpenseForm({ category: "", price: "" });
+
+    setFormSubmitted(false);
   };
 
   return (
@@ -68,8 +84,9 @@ export const HomePages = () => {
         <ExpenseForm
           expenseForm={expenseForm}
           errors={errors}
-          onUpdsteExpenseForm={updateExpenseForm}
-          onAddExpense={handleExpense}
+          onUpdateExpenseForm={onUpdateExpenseForm}
+          formSubmitted={formSubmitted}
+          onAddExpense={onAddExpense}
         />
         <ExpenseList expenses={expenses} />
       </main>
