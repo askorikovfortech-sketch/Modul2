@@ -60,6 +60,8 @@
 
 @media (max-width: 780px) {
   .expense {
+    width: 100%;
+
     &__list {
       padding-right: 30px;
     }
@@ -67,12 +69,21 @@
     &__line {
       display: none;
     }
+
+    &__adaptiv,
+    &__item{
+      gap: 95px;
+    }
   }
 }
 
 @media (max-width: 480px) {
   .expense {
     width: calc(100% - 30px);
+
+    &__item{
+      gap: 60px;
+    }
 
     &__adaptiv {
       display: flex;
