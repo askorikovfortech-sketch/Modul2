@@ -3,7 +3,7 @@ import check_mark from "../../images/check_mark.png";
 import "./styles.scss";
 
 export const ExpenseEditing = ({
-  editForm,
+  edit,
   errors,
   EditChange,
   SaveEdit,
@@ -18,7 +18,7 @@ export const ExpenseEditing = ({
             type="text"
             className="expense-editing__category"
             name="category"
-            value={editForm.category}
+            value={edit.category}
             onChange={EditChange}
             placeholder="Категория"
           />
@@ -32,7 +32,7 @@ export const ExpenseEditing = ({
             type="text"
             className="expense-editing__date"
             name="date"
-            value={editForm.date}
+            value={edit.date}
             onChange={EditChange}
             placeholder="ДД.ММ.ГГГГ"
           />
@@ -46,7 +46,7 @@ export const ExpenseEditing = ({
             type="number"
             className="expense-editing__price"
             name="price"
-            value={editForm.price}
+            value={edit.price}
             onChange={EditChange}
             placeholder="Сумма"
           />

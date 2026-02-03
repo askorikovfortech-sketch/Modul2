@@ -7,7 +7,7 @@ import "./styles.scss";
 export const HomePages = () => {
 const [expenses, setExpenses] = useState(initialExpenses);
   const [editingId, setEditingId] = useState(null);
-  const [editForm, setEditForm] = useState({
+  const [edit, setEdit] = useState({
     category: "",
     date: "",
     price: ""
@@ -16,7 +16,7 @@ const [expenses, setExpenses] = useState(initialExpenses);
 
  const startEditing = (expense) => {
     setEditingId(expense.id);
-    setEditForm({
+    setEdit({
       category: expense.category,
       date: expense.date,
       price: expense.price
@@ -31,7 +31,7 @@ const [expenses, setExpenses] = useState(initialExpenses);
 
   const handleEditChange = (e) => {
     const { name, value } = e.target;
-    setEditForm(prev => ({
+    setEdit(prev => ({
       ...prev,
       [name]: value
     }));
@@ -48,26 +48,26 @@ const [expenses, setExpenses] = useState(initialExpenses);
     let isValid = true;
     const newErrors = {};
 
-     if (!editForm.category.trim()) {
+     if (!edit.category.trim()) {
       newErrors.category = "Поле не должно быть пустым";
       isValid = false;
     }
 
-     if (!editForm.date.trim()) {
+     if (!edit.date.trim()) {
       newErrors.date = "Поле не должно быть пустым";
       isValid = false;
-    } else if (!editForm.date.includes(".")) {
+    } else if (!edit.date.includes(".")) {
       newErrors.date = "Поле не должно быть пустым";
       isValid = false;
     }
 
-     if (!editForm.price.trim()) {
+     if (!edit.price.trim()) {
       newErrors.price = "Поле не должно быть пустым";
       isValid = false;
-    } else if (isNaN(Number(editForm.price))) {
+    } else if (isNaN(Number(edit.price))) {
       newErrors.price = "Поле не должно быть пустым";
       isValid = false;
-    } else if (Number(editForm.price) <= 0) {
+    } else if (Number(edit.price) <= 0) {
       newErrors.price = "Поле не должно быть пустым";
       isValid = false;
     }
@@ -84,7 +84,7 @@ const [expenses, setExpenses] = useState(initialExpenses);
  setExpenses(prev => 
       prev.map(expense => 
         expense.id === editingId 
-          ? { ...expense, ...editForm }
+          ? { ...expense, ...edit }
           : expense
       )
     );
@@ -96,7 +96,7 @@ const [expenses, setExpenses] = useState(initialExpenses);
     return expenses.map(expense => ({
       ...expense,
       Editing: expense.id === editingId,
-      editForm: editForm,
+      edit: edit,
       errors: errors,
       EditChange: handleEditChange,
       StartEdit: () => startEditing(expense),

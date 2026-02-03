@@ -16,7 +16,7 @@ export const ExpenseList = ({ expenses }) => {
           <div key={expense.id}>
             {expense.Editing ? (
               <ExpenseEditing 
-                editForm={expense.editForm}
+                edit={expense.edit}
                 errors={expense.errors}
                 EditChange={expense.EditChange}
                 SaveEdit={expense.SaveEdit}
