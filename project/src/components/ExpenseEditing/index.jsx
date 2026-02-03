@@ -20,10 +20,10 @@ export const ExpenseEditing = () => {
         <span className="expense-editing__error"></span>
       </div>
       <div className="expense-editing__button">
-        <button className="verifed">
+        <button className="expense-editing__verifed" type="button">
           <img src={check_mark} alt="check_mark" />
         </button>
-        <button className="defer">
+        <button className="expense-editing__defer" type="button">
           <img src={bascet} alt="bascet" />
         </button>
       </div>
