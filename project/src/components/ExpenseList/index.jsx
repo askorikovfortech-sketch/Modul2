@@ -14,18 +14,18 @@ export const ExpenseList = ({ expenses }) => {
         </div>
         {expenses.map((expense) => (
           <div key={expense.id}>
-            {expense.isEditing ? (
+            {expense.Editing ? (
               <ExpenseEditing 
                 editForm={expense.editForm}
                 errors={expense.errors}
-                onEditChange={expense.onEditChange}
-                onSaveEdit={expense.onSaveEdit}
-                onCancelEdit={expense.onCancelEdit}
+                EditChange={expense.EditChange}
+                SaveEdit={expense.SaveEdit}
+                CancelEdit={expense.CancelEdit}
               />
             ) : (
               <Expense 
                 expense={expense}
-                onStartEdit={expense.onStartEdit}
+                StartEdit={expense.StartEdit}
               />
             )}
           </div>

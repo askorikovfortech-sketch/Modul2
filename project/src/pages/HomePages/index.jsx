@@ -95,13 +95,13 @@ const [expenses, setExpenses] = useState(initialExpenses);
  const getDisplayExpenses = () => {
     return expenses.map(expense => ({
       ...expense,
-      isEditing: expense.id === editingId,
+      Editing: expense.id === editingId,
       editForm: editForm,
       errors: errors,
-      onEditChange: handleEditChange,
-      onStartEdit: () => startEditing(expense),
-      onCancelEdit: cancelEditing,
-      onSaveEdit: saveEdit,
+      EditChange: handleEditChange,
+      StartEdit: () => startEditing(expense),
+      CancelEdit: cancelEditing,
+      SaveEdit: saveEdit,
     }));
   };
 

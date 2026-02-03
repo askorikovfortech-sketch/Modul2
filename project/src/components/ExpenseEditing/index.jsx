@@ -5,9 +5,9 @@ import "./styles.scss";
 export const ExpenseEditing = ({
   editForm,
   errors,
-  onEditChange,
-  onSaveEdit,
-  onCancelEdit,
+  EditChange,
+  SaveEdit,
+  CancelEdit,
 }) => {
   return (
     <div className="expense-editing">
@@ -19,7 +19,7 @@ export const ExpenseEditing = ({
             className="expense-editing__category"
             name="category"
             value={editForm.category}
-            onChange={onEditChange}
+            onChange={EditChange}
             placeholder="Категория"
           />
           <hr className="expense-editing__line" />
@@ -33,7 +33,7 @@ export const ExpenseEditing = ({
             className="expense-editing__date"
             name="date"
             value={editForm.date}
-            onChange={onEditChange}
+            onChange={EditChange}
             placeholder="ДД.ММ.ГГГГ"
           />
           <hr className="expense-editing__line" />
@@ -47,7 +47,7 @@ export const ExpenseEditing = ({
             className="expense-editing__price"
             name="price"
             value={editForm.price}
-            onChange={onEditChange}
+            onChange={EditChange}
             placeholder="Сумма"
           />
           <hr className="expense-editing__line" />
@@ -59,7 +59,7 @@ export const ExpenseEditing = ({
           <button
             className="expense-editing__button"
             type="button"
-            onClick={onSaveEdit}
+            onClick={SaveEdit}
           >
             <img
               src={check_mark}
@@ -70,7 +70,7 @@ export const ExpenseEditing = ({
           <button
             className="expense-editing__button"
             type="button"
-            onClick={onCancelEdit}
+            onClick={CancelEdit}
           >
             <img src={cross} alt="Отмена" className="expense-edition__images" />
           </button>

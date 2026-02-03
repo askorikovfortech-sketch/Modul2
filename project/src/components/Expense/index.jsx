@@ -2,7 +2,7 @@ import pencil from "../../images/pencil.png"
 import basket from "../../images/basket.png"
 import "./styles.scss";
 
-export const Expense = ({ expense, onStartEdit }) => {
+export const Expense = ({ expense, StartEdit }) => {
   return (
     <div className="expense">
       <ul className="expense__list">
@@ -17,7 +17,7 @@ export const Expense = ({ expense, onStartEdit }) => {
             <button 
               type="button" 
               className="expense-redakter"
-              onClick={onStartEdit}
+              onClick={StartEdit}
             >
               <img
                 className="expense-redacter__images"
