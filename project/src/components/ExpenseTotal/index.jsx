@@ -1,13 +1,13 @@
-import { calculateTotalExpenses } from "../../pages/HomePages";
 import "./styles.scss";
 
-export const ExpenseTotal = ({ expenses = [] }) => {
-    const total = calculateTotalExpenses(expenses);
+export const ExpenseTotal = ({ total }) => {
+  const formattedTotal = new Intl.NumberFormat("ru-RU").format(total);
+
   return (
-    <div class="expense-total">
-      <div class="expense-total__box">
-        <p class="expense-total__text">Всего:</p>
-        <p class="expense-total__sum">{total} ₽</p>
+    <div className="expense-total">
+      <div className="expense-total__box">
+        <p className="expense-total__text">Всего:</p>
+        <p className="expense-total__sum">{formattedTotal} ₽</p>
       </div>
     </div>
   );

@@ -1,8 +1,7 @@
 import { Expense } from "../Expense";
-import { expenses } from "../constants";
 import "./styles.scss";
 
-export const ExpenseList = () => {
+export const ExpenseList = ({ expenses, deleteExpense, editExpense }) => {
   return (
     <div className="expense-list">
       <div className="expense-list__block">
@@ -13,7 +12,12 @@ export const ExpenseList = () => {
           <p className="expense-list__category-text">Сумма расхода</p>
         </div>
         {expenses.map((expense) => (
-          <Expense key={expense.id} expense={expense} />
+          <Expense 
+            key={expense.id} 
+            expense={expense}
+            onEdit={() => editExpense(expense.id)}
+            onDelete={() => deleteExpense(expense.id)}
+          />
         ))}
       </div>
     </div>

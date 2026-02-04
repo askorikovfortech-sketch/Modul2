@@ -3,7 +3,7 @@ export const expenses = [
     id: 1,
     category: "Продукты",
     date: "19.01.2026",
-    price: "1223",
+    price: "3263",
   },
 
   { id: 2,
