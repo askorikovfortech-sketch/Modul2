@@ -1,13 +1,16 @@
 import "./styles.scss";
 
 export const ExpenseForm = ({
-  expenseForm,
+  expense,
   errors,
-  onUpdsteExpenseForm,
+  handleExpenseChange,
   formSubmitted,
-  onUpdateExpenseForm,
   onAddExpense,
 }) => {
+  const handleChange = (key, value) => {
+    handleExpenseChange(key, value);
+  };
+
   return (
     <div className="expense-form">
       <div className="expense-form__record">
@@ -16,13 +19,15 @@ export const ExpenseForm = ({
             type="text"
             placeholder="Статья расходов"
             className="expense-form__record-text"
-            value={expenseForm.category}
-            onChange={(e) => onUpdateExpenseForm("category", e.target.value)}
+            value={expense.category}
+            onChange={(e) => handleChange("category", e.target.value)}
           />
           <hr className="expense-form__record-line" />
           <span
             className={`expense-form__error-message ${
               formSubmitted && errors.category
+                ? "expense-form__error-message--visible"
+                : ""
             }`}
           >
             {errors.category}
@@ -33,14 +38,16 @@ export const ExpenseForm = ({
             type="number"
             placeholder="Сумма"
             className="expense-form__record-text"
-            value={expenseForm.price}
-            onChange={(e) => onUpdateExpenseForm("price", e.target.value)}
+            value={expense.price}
+            onChange={(e) => handleChange("price", e.target.value)}
             min={0}
           />
           <hr className="expense-form__record-line" />
           <span
             className={`expense-form__error-message ${
               formSubmitted && errors.price
+                ? "expense-form__error-message--visible"
+                : ""
             }`}
           >
             {errors.price}
