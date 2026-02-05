@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { ExpenseList } from "../../components/ExpenseList";
 import { Header } from "../../components/Header";
-import { ExpenseForm } from "../../components/ExpenseForm";
-import { formatDate } from "../../components/helpers";
-import { expenses as initialExpenses } from "../../components/constants";
-import "./styles.scss";
+import { AddForm } from "../../components/ExpenseForm";
+import { formatDate } from "../../helpers/date";
+import { expenses as initialExpenses } from "../../helpers/constants";
 
 export const HomePages = () => {
   const [expense, setExpense] = useState({
@@ -15,47 +14,10 @@ export const HomePages = () => {
     category: "",
     price: "",
   });
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [submit, setSubmit] = useState(false);
   const [expenses, setExpenses] = useState(initialExpenses);
 
-  const validateForm = () => {
-    const newErrors = {};
-
-    if (!expense.category.trim()) {
-      newErrors.category = "Поле не должно быть пустым или равно 0";
-    }
-
-    if (!expense.price.trim() || Number(expense.price) <= 0) {
-      newErrors.price = "Поле не должно быть пустым или равно 0";
-    }
-
-    return newErrors;
-  };
-
-  const handleExpenseChange = (key, value) => {
-    setExpense((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
-
-    if (errors[key]) {
-      setErrors((prev) => ({
-        ...prev,
-        [key]: "",
-      }));
-    }
-  };
-
-  const handleAddExpense = () => {
-    setFormSubmitted(true);
-
-    const validationErrors = validateForm();
-
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-
+  const addExpense = () => {
     const newExpense = {
       id: Date.now(),
       category: expense.category.trim(),
@@ -69,7 +31,50 @@ export const HomePages = () => {
       price: "",
     });
     setErrors({ category: "", price: "" });
-    setFormSubmitted(false);
+    setSubmit(false);
+  };
+
+  const validateForm = () => {
+    setSubmit(true);
+
+    const newErrors = {
+      category: "",
+      price: "",
+    };
+
+    const hasCategoryError = !expense.category.trim();
+    const hasPriceError = !expense.price.trim() || Number(expense.price) <= 0;
+
+    if (hasCategoryError) {
+      newErrors.category = "Поле не должно быть пустым или равно 0";
+    }
+
+    if (hasPriceError) {
+      newErrors.price = "Поле не должно быть пустым или равно 0";
+    }
+
+    setErrors(newErrors);
+
+    if (!hasCategoryError && !hasPriceError) {
+      addExpense();
+      return true;
+    }
+
+    return false;
+  };
+
+  const change = (key, value) => {
+    setExpense((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+
+    if (errors[key]) {
+      setErrors((prev) => ({
+        ...prev,
+        [key]: "",
+      }));
+    }
   };
 
   return (
@@ -77,12 +82,12 @@ export const HomePages = () => {
       <Header />
 
       <main className="main">
-        <ExpenseForm
+        <AddForm
           expense={expense}
           errors={errors}
-          handleExpenseChange={handleExpenseChange}
-          formSubmitted={formSubmitted}
-          onAddExpense={handleAddExpense}
+          change={change}
+          submit={submit}
+          create={validateForm}
         />
         <ExpenseList expenses={expenses} />
       </main>

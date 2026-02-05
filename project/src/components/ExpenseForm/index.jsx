@@ -1,53 +1,47 @@
 import "./styles.scss";
 
-export const ExpenseForm = ({
+export const AddForm = ({
   expense,
   errors,
-  handleExpenseChange,
-  formSubmitted,
-  onAddExpense,
+  change,
+  submit,
+  create
 }) => {
-  const handleChange = (key, value) => {
-    handleExpenseChange(key, value);
-  };
-
   return (
-    <div className="expense-form">
-      <div className="expense-form__record">
-        <div className="expense-form__record-block">
+    <div className="add-form">
+      <div className="add-form__record">
+        <div className="add-form__record-block">
           <input
             type="text"
             placeholder="Статья расходов"
-            className="expense-form__record-text"
+            className="add-form__record-text"
             value={expense.category}
-            onChange={(e) => handleChange("category", e.target.value)}
+            onChange={(e) => change("category", e.target.value)}
           />
-          <hr className="expense-form__record-line" />
+          <hr className="add-form__record-line" />
           <span
-            className={`expense-form__error-message ${
-              formSubmitted && errors.category
-                ? "expense-form__error-message--visible"
+            className={`add-form__error-message ${
+              submit && errors.category
+                ? "add-form__error-message__visible"
                 : ""
             }`}
           >
             {errors.category}
           </span>
         </div>
-        <div className="expense-form__record-block">
+        <div className="add-form__record-block">
           <input
             type="number"
             placeholder="Сумма"
-            className="expense-form__record-text"
+            className="add-form__record-text"
             value={expense.price}
-            onChange={(e) => handleChange("price", e.target.value)}
+            onChange={(e) => change("price", e.target.value)}
             min={0}
           />
-          <hr className="expense-form__record-line" />
+          <hr className="add-form__record-line" />
           <span
-            className={`expense-form__error-message ${
-              formSubmitted && errors.price
-                ? "expense-form__error-message--visible"
-                : ""
+            className={`add-form__error-message ${
+              submit && errors.price ? "add-form__error-message__visible" : ""
             }`}
           >
             {errors.price}
@@ -55,8 +49,8 @@ export const ExpenseForm = ({
         </div>
         <button
           type="button"
-          className="expense-form__record-button"
-          onClick={onAddExpense}
+          className="add-form__record-button"
+          onClick={create}
         >
           Добавить
         </button>

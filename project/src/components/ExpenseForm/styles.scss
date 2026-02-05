@@ -1,7 +1,8 @@
-.expense-form {
+.add-form {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
+  margin-top: 30px;
 
   &__conteiner {
     display: flex;
@@ -68,7 +69,7 @@
 }
 
 @media (max-width: 780px) {
-  .expense-form {
+  .add-form {
     margin-bottom: 100px;
 
     &__record-record {
@@ -118,7 +119,7 @@
 }
 
 @media (max-width: 480px) {
-  .expense-form {
+  .add-form {
     margin-bottom: 130px;
 
     &__record {
