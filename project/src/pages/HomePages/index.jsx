@@ -1,108 +1,112 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ExpenseList } from "../../components/ExpenseList";
 import { Header } from "../../components/Header";
-import { expenses as initialExpenses } from "../../components/constants";
+import { expenses as initialExpenses } from "../../helpers/constants";
 import "./styles.scss";
 
 export const HomePages = () => {
-const [expenses, setExpenses] = useState(initialExpenses);
-  const [editingId, setEditingId] = useState(null);
-  const [edit, setEdit] = useState({
+  const [expenses, setExpenses] = useState([]);
+  const [editedExpenseId, setEditedExpenseId] = useState(null);
+
+  useEffect(() => {
+    setExpenses(initialExpenses);
+  }, []);
+  const [editingData, setEditingData] = useState({
     category: "",
     date: "",
-    price: ""
+    price: "",
   });
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    category: "",
+    date: "",
+    price: "",
+  });
 
- const startEditing = (expense) => {
-    setEditingId(expense.id);
-    setEdit({
+  const openingEditingForm = (expense) => {
+    setEditedExpenseId(expense.id);
+    setEditingData({
       category: expense.category,
       date: expense.date,
-      price: expense.price
+      price: expense.price,
     });
-    setErrors({});
+    setErrors({
+      category: "",
+      date: "",
+      price: "",
+    });
   };
 
-  const cancelEditing = () => {
-    setEditingId(null);
-    setErrors({});
+  const cancel = () => {
+    setEditedExpenseId(null);
+    setErrors({
+      category: "",
+      date: "",
+      price: "",
+    });
   };
 
-  const handleEditChange = (e) => {
+  const change = (e) => {
     const { name, value } = e.target;
-    setEdit(prev => ({
+    setEditingData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
 
     if (errors[name]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [name]: ""
+        [name]: "",
       }));
     }
   };
 
   const validateForm = () => {
-    let isValid = true;
-    const newErrors = {};
+    const newErrors = {
+      category: "",
+      date: "",
+      price: "",
+    };
 
-     if (!edit.category.trim()) {
+    if (!editingData.category.trim()) {
       newErrors.category = "Поле не должно быть пустым";
-      isValid = false;
     }
-
-     if (!edit.date.trim()) {
+    if (!editingData.date.trim()) {
       newErrors.date = "Поле не должно быть пустым";
-      isValid = false;
-    } else if (!edit.date.includes(".")) {
-      newErrors.date = "Поле не должно быть пустым";
-      isValid = false;
+    }
+    if (!editingData.price.trim()) {
+      newErrors.price = "Поле не должно быть пустым";
     }
 
-     if (!edit.price.trim()) {
-      newErrors.price = "Поле не должно быть пустым";
-      isValid = false;
-    } else if (isNaN(Number(edit.price))) {
-      newErrors.price = "Поле не должно быть пустым";
-      isValid = false;
-    } else if (Number(edit.price) <= 0) {
-      newErrors.price = "Поле не должно быть пустым";
-      isValid = false;
+    setErrors(newErrors);
+
+    const hasError = Object.values(newErrors).some((error) => error !== "");
+
+    if (!hasError) {
+      save();
+      return true;
     }
 
-   setErrors(newErrors);
-    return isValid;
+    return false;
   };
 
-   const saveEdit = () => {
-     if (!validateForm()) {
-      return;
-    }
+  const save = () => {
+    setExpenses((prev) => {
+      const index = prev.findIndex((expense) => expense.id === editedExpenseId);
 
- setExpenses(prev => 
-      prev.map(expense => 
-        expense.id === editingId 
-          ? { ...expense, ...edit }
-          : expense
-      )
-    );
+      if (index === -1) return prev;
 
-    cancelEditing();
-  };
+      const newExpenses = [...prev];
+      newExpenses[index] = {
+        ...newExpenses[index],
+        category: editingData.category.trim(),
+        date: editingData.date.trim(),
+        price: editingData.price.trim(),
+      };
 
- const getDisplayExpenses = () => {
-    return expenses.map(expense => ({
-      ...expense,
-      Editing: expense.id === editingId,
-      edit: edit,
-      errors: errors,
-      EditChange: handleEditChange,
-      StartEdit: () => startEditing(expense),
-      CancelEdit: cancelEditing,
-      SaveEdit: saveEdit,
-    }));
+      return newExpenses;
+    });
+
+    cancel();
   };
 
   return (
@@ -110,7 +114,16 @@ const [expenses, setExpenses] = useState(initialExpenses);
       <Header />
 
       <main className="main">
-        <ExpenseList expenses={getDisplayExpenses()} />
+        <ExpenseList
+          expenses={expenses}
+          editedExpenseId={editedExpenseId}
+          editingData={editingData}
+          errors={errors}
+          openingEditingForm={openingEditingForm}
+          cancel={cancel}
+          change={change}
+          save={() => validateForm()}
+        />
       </main>
     </div>
   );

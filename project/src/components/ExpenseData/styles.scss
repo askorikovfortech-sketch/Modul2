@@ -1,4 +1,4 @@
-.expense-editing {
+.expense-data {
   width: 1080px;
 
   &__general {
@@ -40,16 +40,6 @@
     background-color: #ccd3da;
   }
 
-  &__button {
-    color: #92278f;
-    width: 40px;
-    height: 40px;
-    background-color: #ccd3da;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-  }
-
   &__images {
     position: relative;
     right: 2px;
@@ -71,7 +61,7 @@
 }
 
 @media (max-width: 780px) {
-  .expense-editing {
+  .expense-data {
     width: 684px;
 
     &__general {
@@ -92,7 +82,7 @@
 }
 
 @media (max-width: 480px) {
-  .expense-editing {
+  .expense-data {
     max-width: 100%;
     display: flex;
     justify-content: center;

@@ -1,8 +1,9 @@
 import pencil from "../../images/pencil.png"
 import basket from "../../images/basket.png"
+import "../../helpers/constants"
 import "./styles.scss";
 
-export const Expense = ({ expense, StartEdit }) => {
+export const Expense = ({ expense, openingEditingForm  }) => {
   return (
     <div className="expense">
       <ul className="expense__list">
@@ -16,11 +17,11 @@ export const Expense = ({ expense, StartEdit }) => {
           <div className="expense__edit">
             <button 
               type="button" 
-              className="expense-redakter"
-              onClick={StartEdit}
+              className="expense-change"
+              onClick={openingEditingForm }
             >
               <img
-                className="expense-redacter__images"
+                className="expense-change__images"
                 src={pencil}
                 alt="pencil"
               />
