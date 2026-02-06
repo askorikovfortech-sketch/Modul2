@@ -31,7 +31,7 @@
     color: #92278f;
   }
 
-  &__button {
+  &__buttons {
     display: flex;
     gap: 10px;
   }
@@ -42,6 +42,17 @@
     border: none;
     background-color: #ccd3da;
   }
+}
+
+.expense-edit,
+.expense-delete {
+  color: #92278f;
+  width: 40px;
+  height: 40px;
+  background-color: #ccd3da;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
 }
 
 @media (max-width: 780px) {
@@ -57,7 +68,7 @@
     }
 
     &__adaptiv,
-    &__item{
+    &__item {
       gap: 95px;
     }
   }
@@ -67,7 +78,7 @@
   .expense {
     width: calc(100% - 30px);
 
-    &__item{
+    &__item {
       gap: 60px;
     }
 

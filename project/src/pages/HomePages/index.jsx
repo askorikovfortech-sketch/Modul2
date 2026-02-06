@@ -6,12 +6,12 @@ import "./styles.scss";
 
 export const HomePages = () => {
   const [expenses, setExpenses] = useState([]);
-  const [editedExpenseId, setEditedExpenseId] = useState(null);
+  const [idEditedExpense, setIdEditedExpense] = useState(null);
 
   useEffect(() => {
     setExpenses(initialExpenses);
   }, []);
-  const [editingData, setEditingData] = useState({
+  const [editedExpense, setEditedExpense] = useState({
     category: "",
     date: "",
     price: "",
@@ -23,8 +23,8 @@ export const HomePages = () => {
   });
 
   const openingEditingForm = (expense) => {
-    setEditedExpenseId(expense.id);
-    setEditingData({
+    setIdEditedExpense(expense.id);
+    setEditedExpense({
       category: expense.category,
       date: expense.date,
       price: expense.price,
@@ -36,8 +36,8 @@ export const HomePages = () => {
     });
   };
 
-  const cancel = () => {
-    setEditedExpenseId(null);
+  const cancelEditing = () => {
+    setIdEditedExpense(null);
     setErrors({
       category: "",
       date: "",
@@ -45,9 +45,9 @@ export const HomePages = () => {
     });
   };
 
-  const change = (e) => {
+  const changeField = (e) => {
     const { name, value } = e.target;
-    setEditingData((prev) => ({
+    setEditedExpense((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -67,13 +67,13 @@ export const HomePages = () => {
       price: "",
     };
 
-    if (!editingData.category.trim()) {
+    if (!editedExpense.category.trim()) {
       newErrors.category = "Поле не должно быть пустым";
     }
-    if (!editingData.date.trim()) {
+    if (!editedExpense.date.trim()) {
       newErrors.date = "Поле не должно быть пустым";
     }
-    if (!editingData.price.trim()) {
+    if (!editedExpense.price.trim()) {
       newErrors.price = "Поле не должно быть пустым";
     }
 
@@ -91,22 +91,22 @@ export const HomePages = () => {
 
   const save = () => {
     setExpenses((prev) => {
-      const index = prev.findIndex((expense) => expense.id === editedExpenseId);
+      const index = prev.findIndex((expense) => expense.id === idEditedExpense);
 
       if (index === -1) return prev;
 
       const newExpenses = [...prev];
       newExpenses[index] = {
         ...newExpenses[index],
-        category: editingData.category.trim(),
-        date: editingData.date.trim(),
-        price: editingData.price.trim(),
+        category: editedExpense.category.trim(),
+        date: editedExpense.date.trim(),
+        price: editedExpense.price.trim(),
       };
 
       return newExpenses;
     });
 
-    cancel();
+    cancelEditing();
   };
 
   return (
@@ -116,13 +116,13 @@ export const HomePages = () => {
       <main className="main">
         <ExpenseList
           expenses={expenses}
-          editedExpenseId={editedExpenseId}
-          editingData={editingData}
+          idEditedExpense={idEditedExpense}
+          editedExpense={editedExpense}
           errors={errors}
           openingEditingForm={openingEditingForm}
-          cancel={cancel}
-          change={change}
-          save={() => validateForm()}
+          cancelEditing={cancelEditing}
+          changeField ={changeField}
+          validateForm={ validateForm }
         />
       </main>
     </div>

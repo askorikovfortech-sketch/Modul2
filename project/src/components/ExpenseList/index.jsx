@@ -1,16 +1,16 @@
 import { Expense } from "../Expense";
-import { ExpenseData } from "../ExpenseData";
+import { EditedExpense } from "../EditedExpense";
 import "./styles.scss";
 
 export const ExpenseList = ({
   expenses,
-  editingData,
+  editedExpense,
   errors,
-  cancel,
-  save,
-  change,
+  cancelEditing,
+  validateForm,
+  changeField,
   openingEditingForm,
-  editedExpenseId,
+  idEditedExpense,
 }) => {
   return (
     <div className="expense-list">
@@ -23,13 +23,13 @@ export const ExpenseList = ({
         </div>
         {expenses.map((expense) => (
           <div key={expense.id}>
-            {expense.id === editedExpenseId ? (
-              <ExpenseData
-                editingData={editingData}
+            {expense.id === idEditedExpense ? (
+              <EditedExpense
+                editedExpense={editedExpense}
                 errors={errors}
-                change={change}
-                save={save}
-                cancel={cancel}
+                changeField={changeField}
+                validateForm={validateForm}
+                cancelEditing={cancelEditing}
               />
             ) : (
               <Expense

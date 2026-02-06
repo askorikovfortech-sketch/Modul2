@@ -3,11 +3,11 @@ import checkMark from "../../images/checkMark.png";
 import "./styles.scss";
 
 export const EditedExpense = ({ 
-  editingData,
+  editedExpense,
   errors,
-  change,
-  save,
-  cancel
+  changeField,
+  validateForm,
+  cancelEditing
 }) => {
   return (
     <div className="edited-expense">
@@ -18,8 +18,8 @@ export const EditedExpense = ({
             type="text"
             className="edited-expense__category"
             name="category"
-            value={editingData.category}
-            onChange={change}
+            value={editedExpense.category}
+            onChange={changeField}
             placeholder="Категория"
           />
           <hr className="edited-expense__line" />
@@ -32,8 +32,8 @@ export const EditedExpense = ({
             type="text"
             className="edited-expense__date"
             name="date"
-            value={editingData.date}
-            onChange={change}
+            value={editedExpense.date}
+            onChange={changeField}
             placeholder="ДД.ММ.ГГГГ"
           />
           <hr className="edited-expense__line" />
@@ -46,8 +46,8 @@ export const EditedExpense = ({
             type="number"
             className="edited-expense__price"
             name="price"
-            value={editingData.price}
-            onChange={change}
+            value={editedExpense.price}
+            onChange={changeField}
             placeholder="Сумма"
           />
           <hr className="edited-expense__line" />
@@ -56,7 +56,7 @@ export const EditedExpense = ({
           )}
         </div>
         <div className="edited-expense__edit">
-          <button className="edited-expense__button" type="button" onClick={save}>
+          <button className="edited-expense__button" type="button" onClick={validateForm}>
             <img
               src={checkMark}
               alt="Сохранить"
@@ -66,7 +66,7 @@ export const EditedExpense = ({
           <button
             className="edited-expense__button"
             type="button"
-            onClick={cancel}
+            onClick={cancelEditing}
           >
             <img src={cross} alt="Отмена" className="edited-expense__images" />
           </button>

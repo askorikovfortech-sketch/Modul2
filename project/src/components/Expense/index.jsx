@@ -14,7 +14,7 @@ export const Expense = ({ expense, openingEditingForm  }) => {
             <span className="expense__date"> {expense.date} </span>
             <span className="expense__sum">{expense.price} ₽</span>
           </div>
-          <div className="expense__button">
+          <div className="expense__buttons">
             <button 
               type="button" 
               className="expense-edit"

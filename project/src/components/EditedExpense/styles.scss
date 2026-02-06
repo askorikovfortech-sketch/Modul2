@@ -58,6 +58,16 @@
     font-weight: 400;
     color: #ed1c24;
   }
+
+  &__button {
+    color: #92278f;
+    width: 40px;
+    height: 40px;
+    background-color: #ccd3da;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+  }
 }
 
 @media (max-width: 780px) {
