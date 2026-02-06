@@ -4,7 +4,7 @@ import { ExpenseList } from "../../components/ExpenseList";
 import { Header } from "../../components/Header";
 import { ExpenseTotal } from "../../components/ExpenseTotal";
 import { AddForm } from "../../components/ExpenseForm";
-import { initialExpenses } from "../../helpers/constants";
+import { initialExpenses } from "../../components/constants";
 import { formatDate } from "../../helpers/date";
 import "./styles.scss";
 
