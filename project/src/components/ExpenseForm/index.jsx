@@ -1,11 +1,11 @@
 import "./styles.scss";
 
 export const AddForm = ({
-  expense,
-  errors,
-  change,
-  submit,
-  create
+  expenseAdd,
+  errorsAdd,
+  handlerChangeField,
+  submitVisibiliErrors,
+  validateForm
 }) => {
   return (
     <div className="add-form">
@@ -15,18 +15,18 @@ export const AddForm = ({
             type="text"
             placeholder="Статья расходов"
             className="add-form__record-text"
-            value={expense.category}
-            onChange={(e) => change("category", e.target.value)}
+            value={expenseAdd.category}
+            onChange={(e) => handlerChangeField("category", e.target.value)}
           />
           <hr className="add-form__record-line" />
           <span
             className={`add-form__error-message ${
-              submit && errors.category
+              submitVisibiliErrors && errorsAdd.category
                 ? "add-form__error-message__visible"
                 : ""
             }`}
           >
-            {errors.category}
+            {errorsAdd.category}
           </span>
         </div>
         <div className="add-form__record-block">
@@ -34,23 +34,23 @@ export const AddForm = ({
             type="number"
             placeholder="Сумма"
             className="add-form__record-text"
-            value={expense.price}
-            onChange={(e) => change("price", e.target.value)}
+            value={expenseAdd.price}
+            onChange={(e) => handlerChangeField("price", e.target.value)}
             min={0}
           />
           <hr className="add-form__record-line" />
           <span
             className={`add-form__error-message ${
-              submit && errors.price ? "add-form__error-message__visible" : ""
+              submitVisibiliErrors && errorsAdd.price ? "add-form__error-message__visible" : ""
             }`}
           >
-            {errors.price}
+            {errorsAdd.price}
           </span>
         </div>
         <button
           type="button"
           className="add-form__record-button"
-          onClick={create}
+          onClick={validateForm}
         >
           Добавить
         </button>
