@@ -1,4 +1,4 @@
-.expense-data {
+.edited-expense {
   width: 1080px;
 
   &__general {
@@ -61,7 +61,7 @@
 }
 
 @media (max-width: 780px) {
-  .expense-data {
+  .edited-expense {
     width: 684px;
 
     &__general {
@@ -82,7 +82,7 @@
 }
 
 @media (max-width: 480px) {
-  .expense-data {
+  .edited-expense {
     max-width: 100%;
     display: flex;
     justify-content: center;

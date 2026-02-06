@@ -14,14 +14,14 @@ export const Expense = ({ expense, openingEditingForm  }) => {
             <span className="expense__date"> {expense.date} </span>
             <span className="expense__sum">{expense.price} ₽</span>
           </div>
-          <div className="expense__edit">
+          <div className="expense__button">
             <button 
               type="button" 
-              className="expense-change"
+              className="expense-edit"
               onClick={openingEditingForm }
             >
               <img
-                className="expense-change__images"
+                className="expense-edit__image"
                 src={pencil}
                 alt="pencil"
               />
