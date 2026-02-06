@@ -1,45 +1,108 @@
+import { useMemo } from "react";
 import { useState } from "react";
 import { ExpenseList } from "../../components/ExpenseList";
 import { Header } from "../../components/Header";
 import { ExpenseTotal } from "../../components/ExpenseTotal";
-import { expenses as initialExpenses } from "../../components/constants";
+import { AddForm } from "../../components/ExpenseForm";
+import { initialExpenses } from "../../helpers/constants";
+import { formatDate } from "../../helpers/date";
 import "./styles.scss";
 
 export const HomePages = () => {
+
+  const [expenseAdd, setExpenseAdd] = useState({
+    category: "",
+    price: "",
+  });
+
+  const [errorsAdd, setErrorsAdd] = useState({
+    category: "",
+    price: "",
+  });
+
+  const [submitVisibiliErrors, setSubmitVisibiliErrors] = useState(false);
   const [expenses, setExpenses] = useState(initialExpenses);
-  const calculateTotalExpenses = () => {
-    return expenses.reduce((total, expense) => {
-      const price = Number(expense.price) || 0;
-      return total + price;
+
+  const totalExpense = useMemo(() => {
+    return expenses.reduce((sum, expense) => {
+      return sum + (Number(expense.price) || 0);
     }, 0);
+  }, [expenses]);
+
+  const addExpense = () => {
+    const newExpense = {
+      id: Date.now(),
+      category: expenseAdd.category.trim(),
+      date: formatDate(),
+      price: expenseAdd.price.trim(),
+    };
+
+    setExpenses((prevExpenses) => [...prevExpenses, newExpense]);
+    setExpenseAdd({
+      category: "",
+      price: "",
+    });
+    setErrorsAdd({ category: "", price: "" });
+    setSubmitVisibiliErrors(false);
   };
 
-  const totalExpenses = calculateTotalExpenses();
+  const validateForm = () => {
+    setSubmitVisibiliErrors(true);
+    setErrorsAdd({ category: "", price: "" });
 
-  const handleDeleteExpense = (id) => {
-    setExpenses((prevExpenses) =>
-      prevExpenses.filter((expense) => expense.id !== id),
-    );
+    if (!expenseAdd.category.trim() && !expenseAdd.price.trim()) {
+      setErrorsAdd({
+        category: "Поле не должно быть пустым и меньше или равно 0",
+        price: "Поле не должно быть пустым и меньше или равно 0",
+      });
+      return;
+    }
+    if (!expenseAdd.category.trim()) {
+      setErrorsAdd({
+        category: "Поле не должно быть пустым и меньше или равно 0",
+        price: "",
+      });
+      return;
+    }
+    if (!expenseAdd.price.trim() || Number(expenseAdd.price) <= 0) {
+      setErrorsAdd({
+        category: "",
+        price: "Поле не должно быть пустым и меньше или равно 0",
+      });
+      return;
+    }
+
+    addExpense();
   };
 
-  const handleEditExpense = (id, updatedExpense) => {
-    setExpenses((prevExpenses) =>
-      prevExpenses.map((expense) =>
-        expense.id === id ? { ...expense, ...updatedExpense } : expense,
-      ),
-    );
+  const handlerChangeField = (key, value) => {
+    setExpenseAdd((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+
+    if (key === "category" && errorsAdd.category) {
+      setErrorsAdd((prev) => ({ ...prev, category: "" }));
+    }
+
+    if (key === "price" && errorsAdd.price) {
+      setErrorsAdd((prev) => ({ ...prev, price: "" }));
+    }
   };
 
   return (
     <div className="home">
       <Header />
       <main className="main">
-        <ExpenseTotal total={totalExpenses} />
-        <ExpenseList
-          expenses={expenses}
-          deleteExpense={handleDeleteExpense}
-          editExpense={handleEditExpense}
+        <AddForm
+          expenseAdd={expenseAdd}
+          errorsAdd={errorsAdd}
+          handlerChangeField={handlerChangeField}
+          submitVisibiliErrors={submitVisibiliErrors}
+          validateForm={validateForm}
         />
+        <ExpenseTotal totalExpense={totalExpense} />
+        <ExpenseList expenses={expenses} />
       </main>
     </div>
   );

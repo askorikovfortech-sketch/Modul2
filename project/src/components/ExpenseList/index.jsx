@@ -1,7 +1,7 @@
 import { Expense } from "../Expense";
 import "./styles.scss";
 
-export const ExpenseList = ({ expenses, deleteExpense, editExpense }) => {
+export const ExpenseList = ({ expenses }) => {
   return (
     <div className="expense-list">
       <div className="expense-list__block">
@@ -15,8 +15,6 @@ export const ExpenseList = ({ expenses, deleteExpense, editExpense }) => {
           <Expense 
             key={expense.id} 
             expense={expense}
-            onEdit={() => editExpense(expense.id)}
-            onDelete={() => deleteExpense(expense.id)}
           />
         ))}
       </div>
