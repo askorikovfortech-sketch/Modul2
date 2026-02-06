@@ -4,18 +4,16 @@ import { ExpenseList } from "../../components/ExpenseList";
 import { Header } from "../../components/Header";
 import { ExpenseTotal } from "../../components/ExpenseTotal";
 import { AddForm } from "../../components/ExpenseForm";
+import { formatDate } from "../../helpers/formatDate";
 import { initialExpenses } from "../../components/constants";
-import { formatDate } from "../../helpers/date";
-import "./styles.scss";
 
 export const HomePages = () => {
-
-  const [expenseAdd, setExpenseAdd] = useState({
+  const [expense, setExpense] = useState({
     category: "",
     price: "",
   });
 
-  const [errorsAdd, setErrorsAdd] = useState({
+  const [errors, setErrors] = useState({
     category: "",
     price: "",
   });
@@ -32,40 +30,39 @@ export const HomePages = () => {
   const addExpense = () => {
     const newExpense = {
       id: Date.now(),
-      category: expenseAdd.category.trim(),
+      category: expense.category.trim(),
       date: formatDate(),
-      price: expenseAdd.price.trim(),
+      price: expense.price.trim(),
     };
 
     setExpenses((prevExpenses) => [...prevExpenses, newExpense]);
-    setExpenseAdd({
+    setExpense({
       category: "",
       price: "",
     });
-    setErrorsAdd({ category: "", price: "" });
+    setErrors({ category: "", price: "" });
     setSubmitVisibiliErrors(false);
   };
 
   const validateForm = () => {
-    setSubmitVisibiliErrors(true);
-    setErrorsAdd({ category: "", price: "" });
+    setErrors({ category: "", price: "" });
 
-    if (!expenseAdd.category.trim() && !expenseAdd.price.trim()) {
-      setErrorsAdd({
+    if (!expense.category.trim() && !expense.price.trim()) {
+      setErrors({
         category: "Поле не должно быть пустым и меньше или равно 0",
         price: "Поле не должно быть пустым и меньше или равно 0",
       });
       return;
     }
-    if (!expenseAdd.category.trim()) {
-      setErrorsAdd({
+    if (!expense.category.trim()) {
+      setErrors({
         category: "Поле не должно быть пустым и меньше или равно 0",
         price: "",
       });
       return;
     }
-    if (!expenseAdd.price.trim() || Number(expenseAdd.price) <= 0) {
-      setErrorsAdd({
+    if (!expense.price.trim() || Number(expense.price) <= 0) {
+      setErrors({
         category: "",
         price: "Поле не должно быть пустым и меньше или равно 0",
       });
@@ -75,18 +72,18 @@ export const HomePages = () => {
     addExpense();
   };
 
-  const handlerChangeField = (key, value) => {
-    setExpenseAdd((prev) => ({
+  const handlerChangeInput = (key, value) => {
+    setExpense((prev) => ({
       ...prev,
       [key]: value,
     }));
 
-    if (key === "category" && errorsAdd.category) {
-      setErrorsAdd((prev) => ({ ...prev, category: "" }));
+    if (key === "category" && errors.category) {
+      setErrors((prev) => ({ ...prev, category: "" }));
     }
 
-    if (key === "price" && errorsAdd.price) {
-      setErrorsAdd((prev) => ({ ...prev, price: "" }));
+    if (key === "price" && errors.price) {
+      setErrors((prev) => ({ ...prev, price: "" }));
     }
   };
 
@@ -95,9 +92,9 @@ export const HomePages = () => {
       <Header />
       <main className="main">
         <AddForm
-          expenseAdd={expenseAdd}
-          errorsAdd={errorsAdd}
-          handlerChangeField={handlerChangeField}
+          expense={expense}
+          errors={errors}
+          handlerChangeInput={handlerChangeInput}
           submitVisibiliErrors={submitVisibiliErrors}
           validateForm={validateForm}
         />
