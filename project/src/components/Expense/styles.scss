@@ -46,20 +46,19 @@
 
 .expense-edit,
 .expense-delete {
-  font-family: "Mazzard";
   color: #92278f;
   width: 40px;
   height: 40px;
   background-color: #ccd3da;
   border-radius: 50%;
   border: none;
-  font-size: 24px;
-  text-align: center;
   cursor: pointer;
 }
 
 @media (max-width: 780px) {
   .expense {
+    width: 100%;
+
     &__list {
       padding-right: 30px;
     }
@@ -67,12 +66,21 @@
     &__line {
       display: none;
     }
+
+    &__adaptiv,
+    &__item {
+      gap: 95px;
+    }
   }
 }
 
 @media (max-width: 480px) {
   .expense {
     width: calc(100% - 30px);
+
+    &__item {
+      gap: 60px;
+    }
 
     &__adaptiv {
       display: flex;
