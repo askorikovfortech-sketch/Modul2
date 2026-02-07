@@ -2,8 +2,7 @@ import pencil from "../../images/pencil.png";
 import basket from "../../images/basket.png";
 import "./styles.scss";
 
-export const Expense = ({ expense, onEdit, onDelete }) => {
-  const formattedPrice = new Intl.NumberFormat("ru-RU").format(expense.price);
+export const Expense = ({ expense, openingEditingForm }) => {
   return (
     <div className="expense">
       <ul className="expense__list">
@@ -12,17 +11,17 @@ export const Expense = ({ expense, onEdit, onDelete }) => {
           <span className="expense__category">{expense.category}</span>
           <div className="expense__adaptiv">
             <span className="expense__date"> {expense.date} </span>
-            <span className="expense__sum">{formattedPrice} ₽</span>
+            <span className="expense__sum">{expense.price} ₽</span>
           </div>
-          <div className="expense__edit">
-            <button type="button" className="expense-redakter" onClick={onEdit}>
-              <img
-                className="expense-redacter__images"
-                src={pencil}
-                alt="pencil"
-              />
+          <div className="expense__buttons">
+            <button
+              type="button"
+              className="expense-edit"
+              onClick={openingEditingForm}
+            >
+              <img className="expense-edit__image" src={pencil} alt="pencil" />
             </button>
-            <button type="button" className="expense-delete" onClick={onDelete}>
+            <button type="button" className="expense-delete">
               <img
                 className="expense-delete__images"
                 src={basket}

@@ -1,7 +1,17 @@
 import { Expense } from "../Expense";
+import { EditedExpense } from "../EditedExpense";
 import "./styles.scss";
 
-export const ExpenseList = ({ expenses }) => {
+export const ExpenseList = ({
+  expenses,
+  editedExpense,
+  editErrors,
+  cancelEditing,
+  validateForm,
+  changeField,
+  openingEditingForm,
+  idEditedExpense,
+}) => {
   return (
     <div className="expense-list">
       <div className="expense-list__block">
@@ -12,10 +22,22 @@ export const ExpenseList = ({ expenses }) => {
           <p className="expense-list__category-text">Сумма расхода</p>
         </div>
         {expenses.map((expense) => (
-          <Expense 
-            key={expense.id} 
-            expense={expense}
-          />
+          <div key={expense.id}>
+            {expense.id === idEditedExpense ? (
+              <EditedExpense
+                editedExpense={editedExpense}
+                editErrors={editErrors}
+                changeField={changeField}
+                validateForm={validateForm}
+                cancelEditing={cancelEditing}
+              />
+            ) : (
+              <Expense
+                expense={expense}
+                openingEditingForm={() => openingEditingForm(expense)}
+              />
+            )}
+          </div>
         ))}
       </div>
     </div>

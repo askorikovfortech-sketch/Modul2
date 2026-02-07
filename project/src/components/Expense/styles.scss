@@ -31,7 +31,7 @@
     color: #92278f;
   }
 
-  &__edit {
+  &__buttons {
     display: flex;
     gap: 10px;
   }
@@ -44,7 +44,7 @@
   }
 }
 
-.expense-redakter,
+.expense-edit,
 .expense-delete {
   font-family: "Mazzard";
   color: #92278f;
