@@ -7,10 +7,6 @@ import "./styles.scss";
 export const HomePages = () => {
   const [expenses, setExpenses] = useState([]);
   const [idEditedExpense, setIdEditedExpense] = useState(null);
-
-  useEffect(() => {
-    setExpenses(initialExpenses);
-  }, []);
   const [editedExpense, setEditedExpense] = useState({
     category: "",
     date: "",
@@ -21,6 +17,10 @@ export const HomePages = () => {
     date: "",
     price: "",
   });
+
+  useEffect(() => {
+    setExpenses(initialExpenses);
+  }, []);
 
   const openingEditingForm = (expense) => {
     setIdEditedExpense(expense.id);
@@ -61,35 +61,33 @@ export const HomePages = () => {
   };
 
   const validateForm = () => {
-    const newErrors = {
+    setErrors({
       category: "",
       date: "",
       price: "",
-    };
+    });
 
-    if (!editedExpense.category.trim()) {
-      newErrors.category = "Поле не должно быть пустым";
+    if (!editedExpense.category.trim() || !editedExpense.date.trim() || !editedExpense.price.trim()) {
+      setErrors({
+        category: !editedExpense.category.trim() ? "Поле не должно быть пустым" : "",
+        date: !editedExpense.date.trim(".") ? "Поле не должно быть пустым" : "",
+        price: !editedExpense.price.trim() ? "Поле не должно быть пустым" : "",
+      });
+      return;
     }
-    if (!editedExpense.date.trim()) {
-      newErrors.date = "Поле не должно быть пустым";
-    }
-    if (!editedExpense.price.trim()) {
-      newErrors.price = "Поле не должно быть пустым";
-    }
-
-    setErrors(newErrors);
-
-    const hasError = Object.values(newErrors).some((error) => error !== "");
-
-    if (!hasError) {
-      save();
-      return true;
+    if (Number(editedExpense.price.trim()) <= 0) {
+      setErrors({
+        category: "",
+        date: "",
+        price: "Поле не должно быть пустым",
+      });
+      return;
     }
 
-    return false;
+    updateExpense();
   };
 
-  const save = () => {
+  const updateExpense = () => {
     setExpenses((prev) => {
       const index = prev.findIndex((expense) => expense.id === idEditedExpense);
 
@@ -121,8 +119,8 @@ export const HomePages = () => {
           errors={errors}
           openingEditingForm={openingEditingForm}
           cancelEditing={cancelEditing}
-          changeField ={changeField}
-          validateForm={ validateForm }
+          changeField={changeField}
+          validateForm={validateForm}
         />
       </main>
     </div>
