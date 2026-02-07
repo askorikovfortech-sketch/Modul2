@@ -1,9 +1,9 @@
 import "./styles.scss";
 
 export const AddForm = ({
-  expenseAdd,
-  errorsAdd,
-  handlerChangeField,
+  expense,
+  errors,
+  handlerChangeInput,
   submitVisibiliErrors,
   validateForm
 }) => {
@@ -15,18 +15,18 @@ export const AddForm = ({
             type="text"
             placeholder="Статья расходов"
             className="add-form__record-text"
-            value={expenseAdd.category}
-            onChange={(e) => handlerChangeField("category", e.target.value)}
+            value={expense.category}
+            onChange={(e) => handlerChangeInput("category", e.target.value)}
           />
           <hr className="add-form__record-line" />
           <span
             className={`add-form__error-message ${
-              submitVisibiliErrors && errorsAdd.category
+              submitVisibiliErrors && errors.category
                 ? "add-form__error-message__visible"
                 : ""
             }`}
           >
-            {errorsAdd.category}
+            {errors.category}
           </span>
         </div>
         <div className="add-form__record-block">
@@ -34,17 +34,17 @@ export const AddForm = ({
             type="number"
             placeholder="Сумма"
             className="add-form__record-text"
-            value={expenseAdd.price}
-            onChange={(e) => handlerChangeField("price", e.target.value)}
+            value={expense.price}
+            onChange={(e) => handlerChangeInput("price", e.target.value)}
             min={0}
           />
           <hr className="add-form__record-line" />
           <span
             className={`add-form__error-message ${
-              submitVisibiliErrors && errorsAdd.price ? "add-form__error-message__visible" : ""
+              submitVisibiliErrors && errors.price ? "add-form__error-message__visible" : ""
             }`}
           >
-            {errorsAdd.price}
+            {errors.price}
           </span>
         </div>
         <button
