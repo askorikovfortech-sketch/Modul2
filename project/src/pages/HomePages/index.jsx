@@ -16,7 +16,6 @@ export const HomePages = () => {
     price: "",
   });
 
-  const [submitVisibiliErrors, setSubmitVisibiliErrors] = useState(false);
   const [expenses, setExpenses] = useState(initialExpenses);
 
   const addExpense = () => {
@@ -33,19 +32,11 @@ export const HomePages = () => {
       price: "",
     });
     setErrors({ category: "", price: "" });
-    setSubmitVisibiliErrors(false);
   };
 
   const validateForm = () => {
     setErrors({ category: "", price: "" });
 
-    if (!expense.category.trim() && !expense.price.trim()) {
-      setErrors({
-        category: "Поле не должно быть пустым и меньше или равно 0",
-        price: "Поле не должно быть пустым и меньше или равно 0",
-      });
-      return;
-    }
     if (!expense.category.trim()) {
       setErrors({
         category: "Поле не должно быть пустым и меньше или равно 0",
@@ -70,12 +61,12 @@ export const HomePages = () => {
       [key]: value,
     }));
 
-    if (key === "category" && errors.category) {
-      setErrors((prev) => ({ ...prev, category: "" }));
-    }
-
-    if (key === "price" && errors.price) {
-      setErrors((prev) => ({ ...prev, price: "" }));
+    if (errors[key]) {
+      setErrors((prev) => ({
+        ...prev,
+        [key]: "",
+      }));
+      return;
     }
   };
 
@@ -88,7 +79,6 @@ export const HomePages = () => {
           expense={expense}
           errors={errors}
           handlerChangeInput={handlerChangeInput}
-          submitVisibiliErrors={submitVisibiliErrors}
           validateForm={validateForm}
         />
         <ExpenseList expenses={expenses} />
