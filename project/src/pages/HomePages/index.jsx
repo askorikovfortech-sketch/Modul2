@@ -3,8 +3,8 @@ import { ExpenseList } from "../../components/ExpenseList";
 import { Header } from "../../components/Header";
 import { ExpenseTotal } from "../../components/ExpenseTotal";
 import { AddForm } from "../../components/ExpenseForm";
-import { formatDate } from "../../helpers/formatDate";
-import { initialExpenses } from "../../components/constants";
+import { formatDate } from "../../helpers/formatDate.js";
+import { initialExpenses } from "../../components/constants.js";
 import "./styles.scss";
 
 export const HomePages = () => {
@@ -25,13 +25,12 @@ export const HomePages = () => {
     price: "",
   });
 
-  const [editErrors, setEditErrors] = useState({
+  const [editingErrors, setEditingErrors] = useState({
     category: "",
     date: "",
     price: "",
   });
 
-  const [submitVisibiliErrors, setSubmitVisibiliErrors] = useState(false);
   const [expenses, setExpenses] = useState(initialExpenses);
 
   useEffect(() => {
@@ -58,7 +57,6 @@ export const HomePages = () => {
       price: "",
     });
     setErrors({ category: "", price: "" });
-    setSubmitVisibiliErrors(false);
   };
 
   const validateForm = () => {
@@ -89,7 +87,7 @@ export const HomePages = () => {
     addExpense();
   };
 
-  const handlerChangeInput = (key, value) => {
+  const handlChangeInput = (key, value) => {
     setExpense((prev) => ({
       ...prev,
       [key]: value,
@@ -104,70 +102,72 @@ export const HomePages = () => {
     }
   };
 
-  const openingEditingForm = (expenseItem) => {
-    setIdEditedExpense(expenseItem.id);
+  const openEditingForm = (expense) => {
+    setIdEditedExpense(expense.id);
     setEditedExpense({
-      category: expenseItem.category,
-      date: expenseItem.date,
-      price: expenseItem.price,
+      category: expense.category,
+      date: expense.date,
+      price: expense.price,
     });
-    setEditErrors({
+    setEditingErrors({
       category: "",
       date: "",
       price: "",
     });
   };
 
-  const cancelEditing = () => {
+  const cancelEditingExpense = () => {
     setIdEditedExpense(null);
-    setEditErrors({
+    setEditingErrors({
       category: "",
       date: "",
       price: "",
     });
   };
 
-  const changeField = (e) => {
+  const handleChangeEditingForm = (e) => {
     const { name, value } = e.target;
     setEditedExpense((prev) => ({
       ...prev,
       [name]: value,
     }));
 
-    if (editErrors[name]) {
-      setEditErrors((prev) => ({
+    if (editingErrors[name]) {
+      setEditingErrors((prev) => ({
         ...prev,
         [name]: "",
       }));
     }
   };
 
-  const validateEditForm = () => {
-    setEditErrors({
+  const validateEditingForm = () => {
+    setEditingErrors({
       category: "",
       date: "",
       price: "",
     });
 
-    if (
-      !editedExpense.category.trim() ||
-      !editedExpense.date.trim() ||
-      !editedExpense.price.trim()
-    ) {
-      setEditErrors({
-        category: !editedExpense.category.trim()
-          ? "Поле не должно быть пустым"
-          : "",
-        date: !editedExpense.date.trim() ? "Поле не должно быть пустым" : "",
-        price: !editedExpense.price.trim() ? "Поле не должно быть пустым" : "",
-      });
+    if (!editedExpense.category.trim()) {
+      setEditingErrors({
+        category: "Поле не должно быть пустым",
+        date: "",
+        price: ""
+      })
       return;
     }
-    if (Number(editedExpense.price.trim()) <= 0) {
-      setEditErrors({
+    if (!editedExpense.date.trim()) {
+      setEditingErrors({
+        category: "",
+        date: "Поле не должно быть пустым",
+        price: ""
+      })
+      return
+    }
+    if (!editedExpense.price.trim() || Number(editedExpense.price.trim()) <= 0) {
+      setEditingErrors({
         category: "",
         date: "",
-        price: "Цена должна быть больше 0",
+        price: "Поле не должно быть пустым",
       });
       return;
     }
@@ -194,7 +194,7 @@ export const HomePages = () => {
       return newExpenses;
     });
 
-    cancelEditing();
+    cancelEditingExpense();
   };
 
   return (
@@ -204,8 +204,7 @@ export const HomePages = () => {
         <AddForm
           expense={expense}
           errors={errors}
-          handlerChangeInput={handlerChangeInput}
-          submitVisibiliErrors={submitVisibiliErrors}
+          handlChangeInput={handlChangeInput}
           validateForm={validateForm}
         />
         <ExpenseTotal totalExpense={totalExpense} />
@@ -213,11 +212,11 @@ export const HomePages = () => {
           expenses={expenses}
           idEditedExpense={idEditedExpense}
           editedExpense={editedExpense}
-          editErrors={editErrors}
-          openingEditingForm={openingEditingForm}
-          cancelEditing={cancelEditing}
-          changeField={changeField}
-          validateForm={validateEditForm}
+          editingErrors={editingErrors}
+          openEditingForm={openEditingForm}
+          cancelEditingExpense={cancelEditingExpense}
+          handleChangeEditingForm={handleChangeEditingForm}
+          validateEditingForm={validateEditingForm}
         />
       </main>
     </div>

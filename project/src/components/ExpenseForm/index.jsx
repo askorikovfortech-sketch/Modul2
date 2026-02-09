@@ -3,7 +3,7 @@ import "./styles.scss";
 export const AddForm = ({
   expense,
   errors,
-  handlerChangeInput,
+  handlChangeInput,
   submitVisibiliErrors,
   validateForm,
 }) => {
@@ -16,7 +16,7 @@ export const AddForm = ({
             placeholder="Статья расходов"
             className="add-form__record-text"
             value={expense.category}
-            onChange={(e) => handlerChangeInput("category", e.target.value)}
+            onChange={(e) => handlChangeInput("category", e.target.value)}
           />
           <hr className="add-form__record-line" />
           <span
@@ -35,7 +35,7 @@ export const AddForm = ({
             placeholder="Сумма"
             className="add-form__record-text"
             value={expense.price}
-            onChange={(e) => handlerChangeInput("price", e.target.value)}
+            onChange={(e) => handlChangeInput("price", e.target.value)}
             min={0}
           />
           <hr className="add-form__record-line" />

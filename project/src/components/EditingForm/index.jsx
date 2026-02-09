@@ -2,12 +2,12 @@ import cross from "../../images/cross.png";
 import checkMark from "../../images/checkMark.png";
 import "./styles.scss";
 
-export const EditedExpense = ({
+export const EditingForm = ({
   editedExpense,
-  editErrors,
-  changeField,
-  validateForm,
-  cancelEditing,
+  editingErrors,
+  handleChangeEditingForm,
+  validateEditingForm,
+  cancelEditingExpense,
 }) => {
   return (
     <div className="edited-expense">
@@ -19,12 +19,12 @@ export const EditedExpense = ({
             className="edited-expense__category"
             name="category"
             value={editedExpense.category}
-            onChange={changeField}
+            onChange={handleChangeEditingForm}
             placeholder="Категория"
           />
           <hr className="edited-expense__line" />
-          {editErrors.category && (
-            <span className="edited-expense__error">{editErrors.category}</span>
+          {editingErrors.category && (
+            <span className="edited-expense__error">{editingErrors.category}</span>
           )}
         </div>
         <div className="edited-expense__block">
@@ -33,12 +33,12 @@ export const EditedExpense = ({
             className="edited-expense__date"
             name="date"
             value={editedExpense.date}
-            onChange={changeField}
+            onChange={handleChangeEditingForm}
             placeholder="ДД.ММ.ГГГГ"
           />
           <hr className="edited-expense__line" />
-          {editErrors.date && (
-            <span className="edited-expense__error">{editErrors.date}</span>
+          {editingErrors.date && (
+            <span className="edited-expense__error">{editingErrors.date}</span>
           )}
         </div>
         <div className="edited-expense__block">
@@ -47,19 +47,19 @@ export const EditedExpense = ({
             className="edited-expense__price"
             name="price"
             value={editedExpense.price}
-            onChange={changeField}
+            onChange={handleChangeEditingForm}
             placeholder="Сумма"
           />
           <hr className="edited-expense__line" />
-          {editErrors.price && (
-            <span className="edited-expense__error">{editErrors.price}</span>
+          {editingErrors.price && (
+            <span className="edited-expense__error">{editingErrors.price}</span>
           )}
         </div>
         <div className="edited-expense__edit">
           <button
             className="edited-expense__button"
             type="button"
-            onClick={validateForm}
+            onClick={validateEditingForm}
           >
             <img
               src={checkMark}
@@ -70,7 +70,7 @@ export const EditedExpense = ({
           <button
             className="edited-expense__button"
             type="button"
-            onClick={cancelEditing}
+            onClick={cancelEditingExpense}
           >
             <img src={cross} alt="Отмена" className="edited-expense__images" />
           </button>
