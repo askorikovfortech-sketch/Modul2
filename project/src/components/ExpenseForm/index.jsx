@@ -4,7 +4,6 @@ export const AddForm = ({
   expense,
   errors,
   handlerChangeInput,
-  submitVisibiliErrors,
   validateForm
 }) => {
   return (
@@ -21,7 +20,7 @@ export const AddForm = ({
           <hr className="add-form__record-line" />
           <span
             className={`add-form__error-message ${
-              submitVisibiliErrors && errors.category
+              errors.category
                 ? "add-form__error-message__visible"
                 : ""
             }`}
@@ -41,7 +40,7 @@ export const AddForm = ({
           <hr className="add-form__record-line" />
           <span
             className={`add-form__error-message ${
-              submitVisibiliErrors && errors.price ? "add-form__error-message__visible" : ""
+              errors.price ? "add-form__error-message__visible" : ""
             }`}
           >
             {errors.price}
