@@ -1,10 +1,11 @@
 .expense-total {
   display: flex;
-  justify-content: right;
+  justify-content: center;
   padding-left: 12px;
   padding-top: 11px;
   margin-bottom: 40px;
-  margin-right: 180px;
+  position: relative;
+  left: 450px;
 
   &__box {
     display: flex;
@@ -56,6 +57,9 @@
 
 @media (max-width: 480px) {
   .expense-total {
+    padding: 0;
+    left: 80px;
+    top: 40px;
     &__box {
       width: 180px;
       justify-content: flex-start;

@@ -1,4 +1,4 @@
-export const expenses = [
+export const initialExpenses = [
   {
     id: 1,
     category: "Продукты",

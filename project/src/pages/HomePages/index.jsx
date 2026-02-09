@@ -10,7 +10,6 @@ import "./styles.scss";
 export const HomePages = () => {
   const [expense, setExpense] = useState({
     category: "",
-    date: "",
     price: "",
   });
 
@@ -23,7 +22,6 @@ export const HomePages = () => {
 
   const [errors, setErrors] = useState({
     category: "",
-    date: "",
     price: "",
   });
 
@@ -57,80 +55,53 @@ export const HomePages = () => {
     setExpenses((prevExpenses) => [...prevExpenses, newExpense]);
     setExpense({
       category: "",
-      date: "",
       price: "",
     });
-  };
-
-  const cancelEditing = () => {
-    setIdEditedExpense(null);
-    setErrors({
-      category: "",
-      date: "",
-      price: "",
-    });
-  };
-
-  const changeField = (e) => {
-    const { name, value } = e.target;
-    setEditedExpense((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    if (errors[name]) {
-      setErrors((prev) => ({
-        ...prev,
-        [name]: "",
-      }));
-    }
+    setErrors({ category: "", price: "" });
+    setSubmitVisibiliErrors(false);
   };
 
   const validateForm = () => {
-    setErrors({
-      category: "",
-      date: "",
-      price: "",
-    });
+    setErrors({ category: "", price: "" });
 
-    if (!editedExpense.category.trim() || !editedExpense.date.trim() || !editedExpense.price.trim()) {
+    if (!expense.category.trim() && !expense.price.trim()) {
       setErrors({
-        category: !editedExpense.category.trim() ? "Поле не должно быть пустым" : "",
-        date: !editedExpense.date.trim(".") ? "Поле не должно быть пустым" : "",
-        price: !editedExpense.price.trim() ? "Поле не должно быть пустым" : "",
+        category: "Поле не должно быть пустым и меньше или равно 0",
+        price: "Поле не должно быть пустым и меньше или равно 0",
       });
       return;
     }
-    if (Number(editedExpense.price.trim()) <= 0) {
+    if (!expense.category.trim()) {
+      setErrors({
+        category: "Поле не должно быть пустым и меньше или равно 0",
+        price: "",
+      });
+      return;
+    }
+    if (!expense.price.trim() || Number(expense.price) <= 0) {
       setErrors({
         category: "",
-        date: "",
-        price: "Поле не должно быть пустым",
+        price: "Поле не должно быть пустым и меньше или равно 0",
       });
       return;
     }
 
-    updateExpense();
+    addExpense();
   };
 
-  const updateExpense = () => {
-    setExpenses((prev) => {
-      const index = prev.findIndex((expense) => expense.id === idEditedExpense);
+  const handlerChangeInput = (key, value) => {
+    setExpense((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
 
-      if (index === -1) return prev;
+    if (key === "category" && errors.category) {
+      setErrors((prev) => ({ ...prev, category: "" }));
+    }
 
-      const newExpenses = [...prev];
-      newExpenses[index] = {
-        ...newExpenses[index],
-        category: editedExpense.category.trim(),
-        date: editedExpense.date.trim(),
-        price: editedExpense.price.trim(),
-      };
-
-      return newExpenses;
-    });
-
-    cancelEditing();
+    if (key === "price" && errors.price) {
+      setErrors((prev) => ({ ...prev, price: "" }));
+    }
   };
 
   const openingEditingForm = (expenseItem) => {
@@ -229,16 +200,12 @@ export const HomePages = () => {
   return (
     <div className="home">
       <Header />
-
       <main className="main">
-        <ExpenseList
-          expenses={expenses}
-          idEditedExpense={idEditedExpense}
-          editedExpense={editedExpense}
+        <AddForm
+          expense={expense}
           errors={errors}
-          openingEditingForm={openingEditingForm}
-          cancelEditing={cancelEditing}
-          changeField={changeField}
+          handlerChangeInput={handlerChangeInput}
+          submitVisibiliErrors={submitVisibiliErrors}
           validateForm={validateForm}
         />
         <ExpenseTotal totalExpense={totalExpense} />

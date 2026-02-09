@@ -1,6 +1,6 @@
 import pencil from "../../images/pencil.png";
 import basket from "../../images/basket.png";
-import "../../helpers/constants";
+import "../constants";
 import "./styles.scss";
 
 export const Expense = ({ expense, openingEditingForm }) => {
