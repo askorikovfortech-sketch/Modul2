@@ -5,7 +5,7 @@ import AddForm from "../../components/ExpenseForm";
 import formatDate from "../../helpers/formatDate";
 import initialExpenses from "../../components/constants";
 
-export const HomePages = () => {
+const HomePages = () => {
   const [expense, setExpense] = useState({
     category: "",
     price: "",
@@ -87,3 +87,5 @@ export const HomePages = () => {
     </div>
   );
 };
+
+export default HomePages;
