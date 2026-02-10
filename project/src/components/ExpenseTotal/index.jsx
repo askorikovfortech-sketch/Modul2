@@ -1,6 +1,6 @@
 import "./styles.scss";
 
-export const ExpenseTotal = ({ totalExpense }) => {
+const ExpenseTotal = ({ totalExpense }) => {
   return (
     <div className="expense-total">
       <div className="expense-total__box">
@@ -10,3 +10,5 @@ export const ExpenseTotal = ({ totalExpense }) => {
     </div>
   );
 };
+
+export default ExpenseTotal

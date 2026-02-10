@@ -1,9 +1,9 @@
 import pencil from "../../images/pencil.png";
 import basket from "../../images/basket.png";
-import { formatPrice } from "../../helpers/formatPrice";
+import formatPrice from "../../helpers/formatPrice";
 import "./styles.scss";
 
-export const Expense = ({
+const Expense = ({
   expense,
   openEditingExpense,
   deleteExpense
@@ -48,3 +48,5 @@ export const Expense = ({
     </div>
   );
 };
+
+export default Expense;
