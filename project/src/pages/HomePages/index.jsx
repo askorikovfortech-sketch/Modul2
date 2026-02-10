@@ -1,13 +1,13 @@
 import { useState, useEffect, useMemo } from "react";
-import { ExpenseList } from "../../components/ExpenseList";
-import { Header } from "../../components/Header";
-import { ExpenseTotal } from "../../components/ExpenseTotal";
-import { AddForm } from "../../components/ExpenseForm";
-import { formatDate } from "../../helpers/formatDate.js";
-import { initialExpenses } from "../../components/constants.js";
+import ExpenseList from "../../components/ExpenseList";
+import Header from "../../components/Header";
+import ExpenseTotal from "../../components/ExpenseTotal";
+import AddForm from "../../components/ExpenseForm";
+import formatDate from "../../helpers/formatDate.js";
+import initialExpenses from "../../components/constants.js";
 import "./styles.scss";
 
-export const HomePages = () => {
+const HomePages = () => {
   const [expense, setExpense] = useState({
     category: "",
     price: "",
@@ -62,23 +62,17 @@ export const HomePages = () => {
   const validateForm = () => {
     setErrors({ category: "", price: "" });
 
-    if (!expense.category.trim() && !expense.price.trim()) {
-      setErrors({
-        category: "Поле не должно быть пустым и меньше или равно 0",
-        price: "Поле не должно быть пустым и меньше или равно 0",
-      });
-      return;
-    }
     if (!expense.category.trim()) {
       setErrors({
+        ...errors,
         category: "Поле не должно быть пустым и меньше или равно 0",
-        price: "",
       });
       return;
     }
+
     if (!expense.price.trim() || Number(expense.price) <= 0) {
       setErrors({
-        category: "",
+        ...errors,
         price: "Поле не должно быть пустым и меньше или равно 0",
       });
       return;
@@ -149,24 +143,22 @@ export const HomePages = () => {
 
     if (!editedExpense.category.trim()) {
       setEditingErrors({
+        ...errors,
         category: "Поле не должно быть пустым",
-        date: "",
-        price: ""
       })
       return;
     }
+
     if (!editedExpense.date.trim()) {
       setEditingErrors({
-        category: "",
+        ...errors,
         date: "Поле не должно быть пустым",
-        price: ""
       })
       return
     }
     if (!editedExpense.price.trim() || Number(editedExpense.price.trim()) <= 0) {
       setEditingErrors({
-        category: "",
-        date: "",
+        ...errors,
         price: "Поле не должно быть пустым",
       });
       return;
@@ -222,3 +214,5 @@ export const HomePages = () => {
     </div>
   );
 };
+
+export default HomePages

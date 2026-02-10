@@ -2,7 +2,7 @@ import cross from "../../images/cross.png";
 import checkMark from "../../images/checkMark.png";
 import "./styles.scss";
 
-export const EditingForm = ({
+const EditingForm = ({
   editedExpense,
   editingErrors,
   handleChangeEditingForm,
@@ -79,3 +79,5 @@ export const EditingForm = ({
     </div>
   );
 };
+
+export default EditingForm;

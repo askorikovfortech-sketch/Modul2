@@ -1,8 +1,8 @@
-import { Expense } from "../Expense";
-import { EditingForm } from "../EditingForm";
+import Expense from "../Expense";
+import EditingForm from "../EditingForm";
 import "./styles.scss";
 
-export const ExpenseList = ({
+const ExpenseList = ({
   expenses,
   editedExpense,
   editingErrors,
@@ -43,3 +43,5 @@ export const ExpenseList = ({
     </div>
   );
 };
+
+export default ExpenseList;

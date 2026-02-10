@@ -2,7 +2,7 @@ import pencil from "../../images/pencil.png";
 import basket from "../../images/basket.png";
 import "./styles.scss";
 
-export const Expense = ({
+const Expense = ({
   expense,
   openEditingForm
 }) => {
@@ -40,3 +40,5 @@ export const Expense = ({
     </div>
   );
 };
+
+export default Expense;
