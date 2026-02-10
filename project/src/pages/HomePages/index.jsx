@@ -51,6 +51,7 @@ const HomePages = () => {
       });
       return;
     }
+    
     if (!expense.price.trim() || Number(expense.price) <= 0) {
       setErrors({
         ...errors,
