@@ -2,7 +2,7 @@ import pencil from "../../images/pencil.png";
 import basket from "../../images/basket.png";
 import "./styles.scss";
 
-export const Expense = ({ expense }) => {
+const Expense = ({ expense }) => {
   return (
     <div className="expense">
       <ul className="expense__list">
@@ -34,3 +34,5 @@ export const Expense = ({ expense }) => {
     </div>
   );
 };
+
+export default Expense;

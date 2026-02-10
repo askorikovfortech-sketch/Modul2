@@ -1,7 +1,7 @@
-import { Expense } from "../Expense";
+import Expense from "../Expense";
 import "./styles.scss";
 
-export const ExpenseList = ({ expenses }) => {
+const ExpenseList = ({ expenses }) => {
   return (
     <div className="expense-list">
       <div className="expense-list__block">
@@ -18,3 +18,5 @@ export const ExpenseList = ({ expenses }) => {
     </div>
   );
 };
+
+export default ExpenseList;

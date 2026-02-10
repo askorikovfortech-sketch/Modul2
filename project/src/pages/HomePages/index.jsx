@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { ExpenseList } from "../../components/ExpenseList";
-import { Header } from "../../components/Header";
-import { AddForm } from "../../components/ExpenseForm";
-import { formatDate } from "../../helpers/formatDate";
-import { initialExpenses } from "../../components/constants";
+import ExpenseList from "../../components/ExpenseList";
+import Header from "../../components/Header";
+import AddForm from "../../components/ExpenseForm";
+import formatDate from "../../helpers/formatDate";
+import initialExpenses from "../../components/constants";
 
 export const HomePages = () => {
   const [expense, setExpense] = useState({
@@ -39,14 +39,15 @@ export const HomePages = () => {
 
     if (!expense.category.trim()) {
       setErrors({
-        category: "Поле не должно быть пустым и меньше или равно 0",
-        price: "",
+        ...errors,
+        category: "Поле не должно быть пустым и меньше или равно 0"
       });
       return;
     }
+
     if (!expense.price.trim() || Number(expense.price) <= 0) {
       setErrors({
-        category: "",
+        ...errors,
         price: "Поле не должно быть пустым и меньше или равно 0",
       });
       return;

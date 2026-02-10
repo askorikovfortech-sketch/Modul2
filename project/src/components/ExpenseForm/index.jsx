@@ -1,6 +1,6 @@
 import "./styles.scss";
 
-export const AddForm = ({
+const AddForm = ({
   expense,
   errors,
   handlerChangeInput,
@@ -57,3 +57,5 @@ export const AddForm = ({
     </div>
   );
 };
+
+export default AddForm;
