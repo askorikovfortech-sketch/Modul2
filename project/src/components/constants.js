@@ -3,7 +3,7 @@ const initialExpenses = [
     id: 1,
     category: "Продукты",
     date: "19.01.2026",
-    price: "1223",
+    price: "3263",
   },
 
   {
@@ -14,4 +14,4 @@ const initialExpenses = [
   },
 ];
 
-export default initialExpenses;
+export default initialExpenses

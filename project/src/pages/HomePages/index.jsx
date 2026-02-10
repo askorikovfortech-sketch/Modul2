@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import ExpenseList from "../../components/ExpenseList";
 import Header from "../../components/Header";
+import ExpenseTotal from "../../components/ExpenseTotal";
 import AddForm from "../../components/ExpenseForm";
 import formatDate from "../../helpers/formatDate";
 import initialExpenses from "../../components/constants";
@@ -17,6 +18,12 @@ const HomePages = () => {
   });
 
   const [expenses, setExpenses] = useState(initialExpenses);
+
+  const totalExpense = useMemo(() => {
+    return expenses.reduce((sum, expense) => {
+      return sum + (Number(expense.price) || 0);
+    }, 0);
+  }, [expenses]);
 
   const addExpense = () => {
     const newExpense = {
@@ -40,11 +47,11 @@ const HomePages = () => {
     if (!expense.category.trim()) {
       setErrors({
         ...errors,
-        category: "Поле не должно быть пустым и меньше или равно 0"
+        category: "Поле не должно быть пустым и меньше или равно 0",
       });
       return;
     }
-
+    
     if (!expense.price.trim() || Number(expense.price) <= 0) {
       setErrors({
         ...errors,
@@ -74,7 +81,6 @@ const HomePages = () => {
   return (
     <div className="home">
       <Header />
-
       <main className="main">
         <AddForm
           expense={expense}
@@ -82,10 +88,11 @@ const HomePages = () => {
           handlerChangeInput={handlerChangeInput}
           validateForm={validateForm}
         />
+        <ExpenseTotal totalExpense={totalExpense} />
         <ExpenseList expenses={expenses} />
       </main>
     </div>
   );
 };
 
-export default HomePages;
+export default HomePages

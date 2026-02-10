@@ -12,7 +12,10 @@ const ExpenseList = ({ expenses }) => {
           <p className="expense-list__category-text">Сумма расхода</p>
         </div>
         {expenses.map((expense) => (
-          <Expense key={expense.id} expense={expense} />
+          <Expense 
+            key={expense.id} 
+            expense={expense}
+          />
         ))}
       </div>
     </div>
