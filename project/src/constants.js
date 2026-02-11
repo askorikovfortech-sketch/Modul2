@@ -1,4 +1,4 @@
-export const expenses = [
+const initialExpenses = [
   {
     id: 1,
     category: "Продукты",
@@ -6,9 +6,12 @@ export const expenses = [
     price: "1223",
   },
 
-  { id: 2,
+  {
+    id: 2,
     category: "Топливо",
     date: "20.01.2026",
-    price: "2000"
+    price: "2000",
   },
 ];
+
+export default initialExpenses;
