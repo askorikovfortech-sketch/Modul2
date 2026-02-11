@@ -3,7 +3,7 @@ import ExpenseList from "../../components/ExpenseList";
 import Header from "../../components/Header";
 import AddForm from "../../components/ExpenseForm";
 import formatDate from "../../helpers/formatDate";
-import initialExpenses from "../../components/constants";
+import initialExpenses from "../../constants";
 
 const HomePages = () => {
   const [expense, setExpense] = useState({
