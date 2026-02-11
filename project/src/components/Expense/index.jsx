@@ -6,9 +6,6 @@ const Expense = ({
   expense,
   openEditingForm
 }) => {
-  const handleEditingClick = () => {
-    openEditingForm(expense)
-  }
   return (
     <div className="expense">
       <ul className="expense__list">
@@ -23,7 +20,7 @@ const Expense = ({
             <button
               type="button"
               className="expense-edit"
-              onClick={handleEditingClick}
+              onClick={() => openEditingForm(expense)}
             >
               <img className="expense-edit__image" src={pencil} alt="pencil" />
             </button>
@@ -41,4 +38,4 @@ const Expense = ({
   );
 };
 
-export default Expense;
+export default Expense

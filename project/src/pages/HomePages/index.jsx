@@ -4,7 +4,7 @@ import Header from "../../components/Header";
 import ExpenseTotal from "../../components/ExpenseTotal";
 import AddForm from "../../components/ExpenseForm";
 import formatDate from "../../helpers/formatDate.js";
-import initialExpenses from "../../components/constants.js";
+import initialExpenses from "../../constants.js";
 import "./styles.scss";
 
 const HomePages = () => {
@@ -156,6 +156,7 @@ const HomePages = () => {
       })
       return
     }
+    
     if (!editedExpense.price.trim() || Number(editedExpense.price.trim()) <= 0) {
       setEditingErrors({
         ...errors,
@@ -167,27 +168,28 @@ const HomePages = () => {
     updateExpense();
   };
 
-  const updateExpense = () => {
-    setExpenses((prev) => {
-      const index = prev.findIndex(
-        (expenseItem) => expenseItem.id === idEditedExpense,
-      );
+  const updateExpenseInList = (expensesList, editedId, updatedExpenseData) => {
+  const index = expensesList.findIndex(
+    (expenseItem) => expenseItem.id === editedId,
+  );
 
-      if (index === -1) return prev;
+  if (index === -1) return expensesList;
 
-      const newExpenses = [...prev];
-      newExpenses[index] = {
-        ...newExpenses[index],
-        category: editedExpense.category.trim(),
-        date: editedExpense.date.trim(),
-        price: editedExpense.price.trim(),
-      };
-
-      return newExpenses;
-    });
-
-    cancelEditingExpense();
+  const newExpenses = [...expensesList];
+  newExpenses[index] = {
+    ...newExpenses[index],
+    category: updatedExpenseData.category.trim(),
+    date: updatedExpenseData.date.trim(),
+    price: updatedExpenseData.price.trim(),
   };
+
+  return newExpenses;
+};
+
+const updateExpense = () => {
+  setExpenses((prev) => updateExpenseInList(prev, idEditedExpense, editedExpense));
+  cancelEditingExpense();
+};
 
   return (
     <div className="home">

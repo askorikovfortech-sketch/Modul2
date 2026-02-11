@@ -1,4 +1,4 @@
-.edited-expense {
+.editing-form {
   width: 1080px;
 
   &__general {
@@ -70,7 +70,7 @@
 }
 
 @media (max-width: 780px) {
-  .edited-expense {
+  .editing-form {
     width: 684px;
 
     &__general {
@@ -91,7 +91,7 @@
 }
 
 @media (max-width: 480px) {
-  .edited-expense {
+  .editing-form {
     max-width: 100%;
     display: flex;
     justify-content: center;
