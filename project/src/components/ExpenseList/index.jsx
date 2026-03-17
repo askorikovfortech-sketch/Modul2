@@ -1,8 +1,17 @@
-import { Expense } from "../Expense";
-import { expenses } from "../constants";
+import Expense from "../Expense";
+import EditingForm from "../EditingForm";
 import "./styles.scss";
 
-export const ExpenseList = () => {
+const ExpenseList = ({
+  expenses,
+  editedExpense,
+  editingErrors,
+  cancelEditingExpense,
+  validateEditingForm,
+  handleChangeEditingForm,
+  openEditingForm,
+  idEditedExpense,
+}) => {
   return (
     <div className="expense-list">
       <div className="expense-list__block">
@@ -13,9 +22,26 @@ export const ExpenseList = () => {
           <p className="expense-list__category-text">Сумма расхода</p>
         </div>
         {expenses.map((expense) => (
-          <Expense key={expense.id} expense={expense} />
+          <div key={expense.id}>
+            {expense.id === idEditedExpense ? (
+              <EditingForm
+                editedExpense={editedExpense}
+                editingErrors={editingErrors}
+                handleChangeEditingForm={handleChangeEditingForm}
+                validateEditingForm={validateEditingForm}
+                cancelEditingExpense={cancelEditingExpense}
+              />
+            ) : (
+              <Expense
+                expense={expense}
+                openEditingForm={openEditingForm}
+              />
+            )}
+          </div>
         ))}
       </div>
     </div>
   );
 };
+
+export default ExpenseList;
