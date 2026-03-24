@@ -1,7 +1,7 @@
 import logo from "../../images/logo.png";
 import "./styles.scss";
 
-const Header = () => {
+export const Header = () => {
   return (
     <header className="header">
       <div className="header__logotyp">
@@ -13,5 +13,3 @@ const Header = () => {
     </header>
   );
 };
-
-export default Header;
